@@ -10,12 +10,12 @@ class VentanaInicio extends JFrame implements ActionListener{
 	
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
-	JInternalFrame internalFrameAltaAlumnos;
+	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos;
 	JTextField altaCajaNumControl, altaCajaNombres, altaCajaApPaterno, altaCajaApMaterno;
 	JComboBox altaComboSemestre, altaComboCarrera;
 	JButton altaBtnAgregar, altaBtnBorrar, altaBtnCancelar;
-	JTable altaTabla;
-	DefaultTableModel altaModelo;
+	JTable altaTabla, bajaTabla;
+	DefaultTableModel altaModelo, bajaModelo;
 	
 	public VentanaInicio() {
 		getContentPane().setLayout(new BorderLayout());
@@ -34,6 +34,9 @@ class VentanaInicio extends JFrame implements ActionListener{
 		    menuPrincipalAlumnos.add(itemAltaAlumnos);
 		   
 		    itemBajaAlumnos=new JMenuItem("Eliminar");
+		       itemBajaAlumnos.addActionListener(this);
+	           itemBajaAlumnos.setMnemonic(KeyEvent.VK_E);
+	           itemBajaAlumnos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.ALT_MASK));
 		    menuPrincipalAlumnos.add(itemBajaAlumnos);
 		    
 		    itemCambiosAlumnos=new JMenuItem("Modificar");
@@ -179,6 +182,57 @@ class VentanaInicio extends JFrame implements ActionListener{
 	     //-------------------------------------------------------------------------------
 		    //Ventana bajas alumnos
 	       
+	       
+	       internalFrameBajasAlumnos= new JInternalFrame("Eliminar Alumno");
+	       internalFrameBajasAlumnos.getContentPane().setLayout(null);
+	       internalFrameBajasAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
+	       internalFrameBajasAlumnos.setClosable(true);
+	       internalFrameBajasAlumnos.setMaximizable(true);
+	       internalFrameBajasAlumnos.setIconifiable(true);
+	       internalFrameBajasAlumnos.setResizable(true);
+	       internalFrameBajasAlumnos.setSize(630,500);
+	       //internalFrameAltaAlumnos.setVisible(true);
+	    
+	       //componentes del internalFrameAltaAlumnos
+	       JPanel panelBajasAlumnos=new JPanel();
+	          panelBajasAlumnos.setBackground(Color.RED);
+	          panelBajasAlumnos.setSize(630,70);
+	          panelBajasAlumnos.setLayout(null);
+	          
+	          JLabel baja=new JLabel("<html> <p style=\"color:white;\">BAJAS ALUMNOS</p></html>");
+	          baja.setBounds(20,0,300,70);
+	          baja.setFont(new Font ("Segoe Script", 523, 25));
+	          panelBajasAlumnos.add(alta); 
+	       internalFrameAltaAlumnos.add(panelBajasAlumnos);
+	       
+	       
+	         
+	          JPanel panelTabla1=new JPanel();
+	          panelTabla1.setSize(580,70);
+	          panelTabla1.setLayout(null);
+	          panelTabla1.setBounds(20,300,580,150);
+	          
+	          Object[][] data1=new Object[0][0];
+	          Object [] fila1=new Object[6];
+	          String[] datos1 = {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
+	          
+	          bajaModelo=new DefaultTableModel(data1,datos1);
+	          bajaTabla=new JTable(bajaModelo);
+	          bajaTabla.setBounds(0,0,580,120);
+	          bajaModelo.addRow(new Object[]{"","","",""});
+	          bajaModelo.addRow(new Object[]{"","","",""});
+	          bajaModelo.addRow(new Object[]{"","","",""});
+	          bajaModelo.addRow(new Object[]{"","","",""});
+	          bajaModelo.addRow(new Object[]{"","","",""});
+	          JScrollPane scroll1=new JScrollPane(bajaTabla);
+	  		  scroll1.setBounds(0,0,580,120);
+	          panelTabla1.add(scroll1);
+	          internalFrameBajasAlumnos.add(panelTabla1);
+	       desktopPane.add(internalFrameBajasAlumnos);
+	       
+	     //-------------------------------------------------------------------------------
+		    
+	       
 	        
 	       
 	    desktopPane.setBackground(Color.BLACK);
@@ -192,6 +246,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
+		}if(e.getSource()==itemBajaAlumnos ) {
+			internalFrameBajasAlumnos.setVisible(true);
 		}
 		
 	}

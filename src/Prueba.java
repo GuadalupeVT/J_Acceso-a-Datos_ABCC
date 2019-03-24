@@ -516,8 +516,12 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          internalFrameConsultasAlumnos.add(consultaComboCarrera);
 	       
 	          consultarBtnBuscar=new JButton();
-	          consultarBtnBuscar.setBounds(480, 130, 100, 40);
+	          consultarBtnBuscar.setBounds(480, 125, 100, 40);
 	          internalFrameConsultasAlumnos.add(consultarBtnBuscar);
+	          
+	          consultarBtnBorrar=new JButton("BORRAR");
+	          consultarBtnBorrar.setBounds(480, 190, 100, 25);
+	          internalFrameConsultasAlumnos.add(consultarBtnBorrar);
 	          
 	          
 	       desktopPane.add(internalFrameConsultasAlumnos);

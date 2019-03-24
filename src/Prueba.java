@@ -500,6 +500,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          consultaCajaApMaterno=new JTextField();
 	          consultaCajaApMaterno.setBounds(280,190,150,30);
 	          internalFrameConsultasAlumnos.add(consultaCajaApMaterno);
+	          
+	          consultaSpinnerSemestre=new JSpinner();
+	          consultaSpinnerSemestre.setBounds(280,230,150,30);
+	          internalFrameConsultasAlumnos.add(consultaSpinnerSemestre);
 	       
 	       
 	       desktopPane.add(internalFrameConsultasAlumnos);

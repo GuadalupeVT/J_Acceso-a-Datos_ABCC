@@ -10,15 +10,17 @@ class VentanaInicio extends JFrame implements ActionListener{
 	
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
-	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos;
+	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos, internalFrameModificarAlumnos;
 	JTextField altaCajaNumControl, altaCajaNombres, altaCajaApPaterno, altaCajaApMaterno;
 	JTextField bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno;
-	JComboBox altaComboSemestre, altaComboCarrera, bajaComboCarrera;
+	JTextField modificarCajaNumControl, modificarCajaNombres, modificarCajaApPaterno, modificarCajaApMaterno;
+	JComboBox altaComboSemestre, altaComboCarrera, bajaComboCarrera,modificarComboCarrera;
 	JButton altaBtnAgregar, altaBtnBorrar, altaBtnCancelar;
 	JButton bajaBtnBuscar, bajaBtnBorrar, bajaBtnEliminar, bajaBtnCancelar;
-	JSpinner bajasSpinnerSemestre;
-	JTable altaTabla, bajaTabla;
-	DefaultTableModel altaModelo, bajaModelo;
+	JButton modificarBtnBuscar, modificarBtnBorrar, modificarBtnGuardar, modificarBtnCancelar;
+	JSpinner bajasSpinnerSemestre, modificarSpinnerSemestre;
+	JTable altaTabla, bajaTabla, modificarTabla;
+	DefaultTableModel altaModelo, bajaModelo, modificarModelo;
 	
 	public VentanaInicio() {
 		getContentPane().setLayout(new BorderLayout());
@@ -304,7 +306,126 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       
 	       
 	     //-------------------------------------------------------------------------------
-		    
+		    //Ventana Modificaciones alumno
+	       internalFrameModificarAlumnos= new JInternalFrame("Modificar Alumno");
+	       internalFrameModificarAlumnos.getContentPane().setLayout(null);
+	       internalFrameModificarAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
+	       internalFrameModificarAlumnos.setClosable(true);
+	       internalFrameModificarAlumnos.setMaximizable(true);
+	       internalFrameModificarAlumnos.setIconifiable(true);
+	       internalFrameModificarAlumnos.setResizable(true);
+	       internalFrameModificarAlumnos.setSize(630,500);
+	       //internalFrameAltaAlumnos.setVisible(true);
+	    
+	       //componentes del internalFrameAltaAlumnos
+	       JPanel panelModificarAlumnos=new JPanel();
+	          panelModificarAlumnos.setBackground(Color.PINK);
+	          panelModificarAlumnos.setSize(630,60);
+	          panelModificarAlumnos.setLayout(null);
+	          
+	          JLabel modificar=new JLabel("<html> <p style=\"color:white;\">MODIFICACIONES ALUMNOS</p></html>");
+	          modificar.setBounds(20,0,300,60);
+	          modificar.setFont(new Font ("Segoe Script", 523, 25));
+	          panelModificarAlumnos.add(modificar); 
+	          internalFrameModificarAlumnos.add(panelModificarAlumnos);
+	       
+	      
+	          JLabel modificarNumControl=new JLabel("NUMERO DE CONTROL:");
+	          modificarNumControl.setBounds(60,70,140,30);
+	          internalFrameModificarAlumnos.add(modificarNumControl);
+	          
+	          modificarCajaNumControl=new JTextField();
+	          modificarCajaNumControl.setBounds(200,70,80,30);
+	          internalFrameModificarAlumnos.add(modificarCajaNumControl);
+	          
+	          modificarBtnBuscar=new JButton();
+	          modificarBtnBuscar.setBounds(320, 70, 100, 40);
+	          internalFrameModificarAlumnos.add(modificarBtnBuscar);
+	          
+	          modificarBtnBorrar = new JButton("BORRAR");
+	          modificarBtnBorrar.setBounds(450, 75, 100, 25);
+	          internalFrameModificarAlumnos.add(modificarBtnBorrar);
+	          
+	          JLabel modificarNombres = new JLabel("NOMBRE(S):");
+	          modificarNombres.setBounds(60,130,80,30);
+	          internalFrameModificarAlumnos.add(modificarNombres);
+	          
+	          modificarCajaNombres=new JTextField();
+	          modificarCajaNombres.setBounds(210,130,150,30);
+	          //bajasCajaNombres.setEditable(false);
+	          internalFrameModificarAlumnos.add(modificarCajaNombres);
+	          
+	          JLabel mApPaterno=new JLabel("APELLIDO PATERNO:");
+	          mApPaterno.setBounds(60,170,120,30);
+	          internalFrameModificarAlumnos.add(mApPaterno);
+	          
+	          modificarCajaApPaterno=new JTextField();
+	          modificarCajaApPaterno.setBounds(210,170,150,30);
+	          internalFrameModificarAlumnos.add(modificarCajaApPaterno);
+	          
+	          JLabel mApMaterno=new JLabel("APELLIDO MATERNO:");
+	          mApMaterno.setBounds(60,210,120,30);
+	          internalFrameModificarAlumnos.add(mApMaterno);
+	          
+	          modificarCajaApMaterno=new JTextField();
+	          modificarCajaApMaterno.setBounds(210,210,150,30);
+	          internalFrameModificarAlumnos.add(modificarCajaApMaterno);
+	          
+	          JLabel modificarSemestre=new JLabel("SEMESTRE:");
+	          modificarSemestre.setBounds(60,250,120,30);
+	          internalFrameModificarAlumnos.add(modificarSemestre);
+	          
+	          modificarSpinnerSemestre=new JSpinner();
+	          bajasSpinnerSemestre.setBounds(210,250,150,30);
+	          internalFrameModificarAlumnos.add(modificarSpinnerSemestre);
+	          
+	          JLabel modificarCarrera=new JLabel("CARRERA:");
+	          modificarCarrera.setBounds(60,290,120,30);
+	          internalFrameModificarAlumnos.add(modificarCarrera);
+	          
+	          modificarComboCarrera= new JComboBox();
+	          modificarComboCarrera.addItem("ISC");
+	          modificarComboCarrera.addItem("IM");
+	          modificarComboCarrera.addItem("III");
+	          modificarComboCarrera.addItem("CP");
+	          modificarComboCarrera.addItem("LA");
+	          modificarComboCarrera.setBounds(210,290,150,30);
+	          internalFrameModificarAlumnos.add(modificarComboCarrera);
+	          
+	          modificarBtnGuardar=new JButton("GUARDAR CAMBIOS");
+	          modificarBtnGuardar.setBounds(450, 175, 120, 25);
+	          internalFrameModificarAlumnos.add(modificarBtnGuardar);
+	          
+	          modificarBtnCancelar=new JButton("CANCELAR");
+	          modificarBtnCancelar.setBounds(450, 240, 120, 25);
+	          internalFrameModificarAlumnos.add(modificarBtnCancelar);
+	          
+	          JPanel panelTabla2=new JPanel();
+	          panelTabla2.setSize(580,70);
+	          panelTabla2.setLayout(null);
+	          panelTabla2.setBounds(20,330,580,150);
+ 
+	          Object[][] data2=new Object[0][0];
+	          Object [] fila2=new Object[6];
+	          String[] datos2= {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
+	          
+	          modificarModelo=new DefaultTableModel(data1,datos1);
+	          modificarTabla=new JTable(modificarModelo);
+	          modificarTabla.setBounds(0,0,580,120);
+	          modificarModelo.addRow(new Object[]{"","","",""});
+	          modificarModelo.addRow(new Object[]{"","","",""});
+	          modificarModelo.addRow(new Object[]{"","","",""});
+	          modificarModelo.addRow(new Object[]{"","","",""});
+	          modificarModelo.addRow(new Object[]{"","","",""});
+	          JScrollPane scroll2=new JScrollPane(modificarTabla);
+	  		  scroll2.setBounds(0,0,580,120);
+	          panelTabla2.add(scroll2);
+	          internalFrameModificarAlumnos.add(panelTabla2);
+	       desktopPane.add(internalFrameModificarAlumnos);
+	       
+	       //-----------------------------------------------------------
+	       
+	       
 	       
 	        
 	       

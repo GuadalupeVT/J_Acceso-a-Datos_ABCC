@@ -21,8 +21,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 	JButton modificarBtnBuscar, modificarBtnBorrar, modificarBtnGuardar, modificarBtnCancelar;
 	JButton consultarBtnBuscar, consultarBtnBorrar, consultarBtnCancelar;
 	JSpinner bajasSpinnerSemestre, modificarSpinnerSemestre, consultaSpinnerSemestre;
-	JTable altaTabla, bajaTabla, modificarTabla;
-	DefaultTableModel altaModelo, bajaModelo, modificarModelo;
+	JTable altaTabla, bajaTabla, modificarTabla, consultaTabla;
+	DefaultTableModel altaModelo, bajaModelo, modificarModelo, consultaModelo;
 	JRadioButton radioTodos,radioNombre,radioApPaterno,radioApMaterno,radioSemestre,radioCarrera;
 	ButtonGroup bg;
 	
@@ -526,6 +526,28 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          consultarBtnCancelar=new JButton("CANCELAR");
 	          consultarBtnCancelar.setBounds(480, 240, 100, 25);
 	          internalFrameConsultasAlumnos.add(consultarBtnCancelar);
+	          
+	          JPanel panelTabla3=new JPanel();
+	          panelTabla3.setSize(580,70);
+	          panelTabla3.setLayout(null);
+	          panelTabla3.setBounds(20,330,580,150);
+ 
+	          Object[][] data3=new Object[0][0];
+	          Object [] fila3=new Object[6];
+	          String[] datos3= {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
+	          
+	          consultaModelo=new DefaultTableModel(data1,datos1);
+	          consultaTabla=new JTable(consultaModelo);
+	          modificarTabla.setBounds(0,0,580,120);
+	          consultaModelo.addRow(new Object[]{"","","",""});
+	          consultaModelo.addRow(new Object[]{"","","",""});
+	          consultaModelo.addRow(new Object[]{"","","",""});
+	          consultaModelo.addRow(new Object[]{"","","",""});
+	          consultaModelo.addRow(new Object[]{"","","",""});
+	          JScrollPane scroll3=new JScrollPane(consultaTabla);
+	  		  scroll3.setBounds(0,0,580,120);
+	          panelTabla3.add(scroll3);
+	          internalFrameConsultasAlumnos.add(panelTabla3);
 	          
 	          
 	       desktopPane.add(internalFrameConsultasAlumnos);

@@ -505,6 +505,14 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          consultaSpinnerSemestre.setBounds(280,230,150,30);
 	          internalFrameConsultasAlumnos.add(consultaSpinnerSemestre);
 	       
+	          consultaComboCarrera= new JComboBox();
+	          consultaComboCarrera.addItem("ISC");
+	          consultaComboCarrera.addItem("IM");
+	          consultaComboCarrera.addItem("III");
+	          consultaComboCarrera.addItem("CP");
+	          consultaComboCarrera.addItem("LA");
+	          consultaComboCarrera.setBounds(280,270,150,30);
+	          internalFrameConsultasAlumnos.add(consultaComboCarrera);
 	       
 	       desktopPane.add(internalFrameConsultasAlumnos);
 	       

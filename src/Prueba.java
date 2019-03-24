@@ -198,39 +198,54 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       //componentes del internalFrameAltaAlumnos
 	       JPanel panelBajasAlumnos=new JPanel();
 	          panelBajasAlumnos.setBackground(Color.RED);
-	          panelBajasAlumnos.setSize(630,70);
+	          panelBajasAlumnos.setSize(630,60);
 	          panelBajasAlumnos.setLayout(null);
 	          
 	          JLabel baja=new JLabel("<html> <p style=\"color:white;\">BAJAS ALUMNOS</p></html>");
-	          baja.setBounds(20,0,300,70);
+	          baja.setBounds(20,0,300,60);
 	          baja.setFont(new Font ("Segoe Script", 523, 25));
 	          panelBajasAlumnos.add(baja); 
 	          internalFrameBajasAlumnos.add(panelBajasAlumnos);
 	       
-	       
-	         
+	      
+	          JLabel bajasNumControl=new JLabel("NUMERO DE CONTROL:");
+	          bajasNumControl.setBounds(60,70,140,30);
+	          internalFrameBajasAlumnos.add(bajasNumControl);
+	          
+	          bajasCajaNumControl=new JTextField();
+	          bajasCajaNumControl.setBounds(200,70,80,30);
+	          internalFrameBajasAlumnos.add(bajasCajaNumControl);
+	          
+	          bajaBtnBuscar=new JButton();
+	          bajaBtnBuscar.setBounds(320, 70, 100, 40);
+	          internalFrameBajasAlumnos.add(bajaBtnBuscar);
+	          
+	          bajaBtnBorrar = new JButton("BORRAR");
+	          bajaBtnBorrar.setBounds(450, 75, 100, 25);
+	          internalFrameBajasAlumnos.add(bajaBtnBorrar);
+	          
+	          JLabel bajaNombres = new JLabel("NOMBRE(S):");
+	          bajaNombres.setBounds(60,130,80,30);
+	          internalFrameBajasAlumnos.add(bajaNombres);
+	          
+	          bajasCajaNombres=new JTextField();
+	          bajasCajaNombres.setBounds(210,130,150,30);
+	          //bajasCajaNombres.setEditable(false);
+	          internalFrameBajasAlumnos.add(bajasCajaNombres);
+	          
+	          JLabel apPaterno=new JLabel("APELLIDO PATERNO:");
+	          apPaterno.setBounds(60,170,120,30);
+	          internalFrameBajasAlumnos.add(apPaterno);
+	          
+	          bajasCajaApPaterno=new JTextField();
+	          bajasCajaApPaterno.setBounds(210,170,150,30);
+	          internalFrameBajasAlumnos.add(bajasCajaApPaterno);
+	          
 	          JPanel panelTabla1=new JPanel();
 	          panelTabla1.setSize(580,70);
 	          panelTabla1.setLayout(null);
 	          panelTabla1.setBounds(20,300,580,150);
-	          
-	          JLabel bajasNumControl=new JLabel("NUMERO DE CONTROL:");
-	          bajasNumControl.setBounds(60,80,140,30);
-	          internalFrameBajasAlumnos.add(bajasNumControl);
-	          
-	          bajasCajaNumControl=new JTextField();
-	          bajasCajaNumControl.setBounds(200,80,80,30);
-	          internalFrameBajasAlumnos.add(bajasCajaNumControl);
-	          
-	          bajaBtnBuscar=new JButton();
-	          bajaBtnBuscar.setBounds(320, 80, 100, 40);
-	          internalFrameBajasAlumnos.add(bajaBtnBuscar);
-	          
-	          bajaBtnBorrar = new JButton("BORRAR");
-	          bajaBtnBorrar.setBounds(450, 85, 100, 25);
-	          internalFrameBajasAlumnos.add(bajaBtnBorrar);
-	          
-	          
+ 
 	          Object[][] data1=new Object[0][0];
 	          Object [] fila1=new Object[6];
 	          String[] datos1 = {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};

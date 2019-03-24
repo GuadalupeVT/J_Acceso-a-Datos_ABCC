@@ -14,11 +14,12 @@ class VentanaInicio extends JFrame implements ActionListener{
 	JTextField altaCajaNumControl, altaCajaNombres, altaCajaApPaterno, altaCajaApMaterno;
 	JTextField bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno;
 	JTextField modificarCajaNumControl, modificarCajaNombres, modificarCajaApPaterno, modificarCajaApMaterno;
-	JComboBox altaComboSemestre, altaComboCarrera, bajaComboCarrera,modificarComboCarrera;
+	JTextField  consultaCajaNombres, consultaCajaApPaterno, consultaCajaApMaterno;
+	JComboBox altaComboSemestre, altaComboCarrera, bajaComboCarrera,modificarComboCarrera, consultaComboCarrera;
 	JButton altaBtnAgregar, altaBtnBorrar, altaBtnCancelar;
 	JButton bajaBtnBuscar, bajaBtnBorrar, bajaBtnEliminar, bajaBtnCancelar;
 	JButton modificarBtnBuscar, modificarBtnBorrar, modificarBtnGuardar, modificarBtnCancelar;
-	JSpinner bajasSpinnerSemestre, modificarSpinnerSemestre;
+	JSpinner bajasSpinnerSemestre, modificarSpinnerSemestre, consultaSpinnerSemestre;
 	JTable altaTabla, bajaTabla, modificarTabla;
 	DefaultTableModel altaModelo, bajaModelo, modificarModelo;
 	JRadioButton radioTodos,radioNombre,radioApPaterno,radioApMaterno,radioSemestre,radioCarrera;
@@ -487,6 +488,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 	  		  bg.add(radioCarrera);
 	  		  radioCarrera.setBounds(120,270,100,30);
 	  		  internalFrameConsultasAlumnos.add(radioCarrera);
+	  		  
+	  		  consultaCajaNombres=new JTextField();
+	          consultaCajaNombres.setBounds(280,110,150,30);
+	          internalFrameConsultasAlumnos.add(consultaCajaNombres);
 	       
 	       
 	       

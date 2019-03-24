@@ -45,6 +45,9 @@ class VentanaInicio extends JFrame implements ActionListener{
 		    menuPrincipalAlumnos.add(itemBajaAlumnos);
 		    
 		    itemCambiosAlumnos=new JMenuItem("Modificar");
+		       itemCambiosAlumnos.addActionListener(this);
+	           itemCambiosAlumnos.setMnemonic(KeyEvent.VK_M);
+	           itemCambiosAlumnos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.ALT_MASK));
 		    menuPrincipalAlumnos.add(itemCambiosAlumnos);
 		    
 		    itemConsultasAlumnos=new JMenuItem("Buscar");
@@ -324,8 +327,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          panelModificarAlumnos.setLayout(null);
 	          
 	          JLabel modificar=new JLabel("<html> <p style=\"color:white;\">MODIFICACIONES ALUMNOS</p></html>");
-	          modificar.setBounds(20,0,300,60);
-	          modificar.setFont(new Font ("Segoe Script", 523, 25));
+	          modificar.setBounds(20,0,400,60);
+	          modificar.setFont(new Font ("Segoe Script", 523, 23));
 	          panelModificarAlumnos.add(modificar); 
 	          internalFrameModificarAlumnos.add(panelModificarAlumnos);
 	       
@@ -376,7 +379,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          internalFrameModificarAlumnos.add(modificarSemestre);
 	          
 	          modificarSpinnerSemestre=new JSpinner();
-	          bajasSpinnerSemestre.setBounds(210,250,150,30);
+	          modificarSpinnerSemestre.setBounds(210,250,150,30);
 	          internalFrameModificarAlumnos.add(modificarSpinnerSemestre);
 	          
 	          JLabel modificarCarrera=new JLabel("CARRERA:");
@@ -393,11 +396,11 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          internalFrameModificarAlumnos.add(modificarComboCarrera);
 	          
 	          modificarBtnGuardar=new JButton("GUARDAR CAMBIOS");
-	          modificarBtnGuardar.setBounds(450, 175, 120, 25);
+	          modificarBtnGuardar.setBounds(450, 175, 150, 25);
 	          internalFrameModificarAlumnos.add(modificarBtnGuardar);
 	          
 	          modificarBtnCancelar=new JButton("CANCELAR");
-	          modificarBtnCancelar.setBounds(450, 240, 120, 25);
+	          modificarBtnCancelar.setBounds(450, 240, 150, 25);
 	          internalFrameModificarAlumnos.add(modificarBtnCancelar);
 	          
 	          JPanel panelTabla2=new JPanel();
@@ -442,6 +445,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 			internalFrameAltaAlumnos.setVisible(true);
 		}if(e.getSource()==itemBajaAlumnos ) {
 			internalFrameBajasAlumnos.setVisible(true);
+		}if(e.getSource()==itemCambiosAlumnos ) {
+			internalFrameModificarAlumnos.setVisible(true);
 		}
 		
 	}

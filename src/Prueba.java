@@ -243,7 +243,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          bajasCajaNombres=new JTextField();
 	          bajasCajaNombres.setBounds(210,130,150,30);
-	          //bajasCajaNombres.setEditable(false);
+	          bajasCajaNombres.setEnabled(false);
 	          internalFrameBajasAlumnos.add(bajasCajaNombres);
 	          
 	          JLabel apPaterno=new JLabel("APELLIDO PATERNO:");
@@ -252,6 +252,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          bajasCajaApPaterno=new JTextField();
 	          bajasCajaApPaterno.setBounds(210,170,150,30);
+	          bajasCajaApPaterno.setEnabled(false);
 	          internalFrameBajasAlumnos.add(bajasCajaApPaterno);
 	          
 	          JLabel apMaterno=new JLabel("APELLIDO MATERNO:");
@@ -260,6 +261,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          bajasCajaApMaterno=new JTextField();
 	          bajasCajaApMaterno.setBounds(210,210,150,30);
+	          bajasCajaApMaterno.setEnabled(false);
 	          internalFrameBajasAlumnos.add(bajasCajaApMaterno);
 	          
 	          JLabel bajasSemestre=new JLabel("SEMESTRE:");
@@ -268,6 +270,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          bajasSpinnerSemestre=new JSpinner();
 	          bajasSpinnerSemestre.setBounds(210,250,150,30);
+	          bajasSpinnerSemestre.setEnabled(false);
 	          internalFrameBajasAlumnos.add(bajasSpinnerSemestre);
 	          
 	          JLabel bajasCarrera=new JLabel("CARRERA:");
@@ -281,6 +284,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	        	  bajaComboCarrera.addItem("CP");
 	        	  bajaComboCarrera.addItem("LA");
 	          bajaComboCarrera.setBounds(210,290,150,30);
+	          bajaComboCarrera.setEnabled(false);
 	          internalFrameBajasAlumnos.add(bajaComboCarrera);
 	          
 	          bajaBtnEliminar=new JButton("ELIMINAR");

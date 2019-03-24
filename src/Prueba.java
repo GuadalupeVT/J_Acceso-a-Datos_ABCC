@@ -10,7 +10,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
-	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos, internalFrameModificarAlumnos;
+	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos, internalFrameModificarAlumnos, internalFrameConsultasAlumnos;
 	JTextField altaCajaNumControl, altaCajaNombres, altaCajaApPaterno, altaCajaApMaterno;
 	JTextField bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno;
 	JTextField modificarCajaNumControl, modificarCajaNombres, modificarCajaApPaterno, modificarCajaApMaterno;
@@ -427,8 +427,21 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       desktopPane.add(internalFrameModificarAlumnos);
 	       
 	       //-----------------------------------------------------------
+	     //Ventana Consultas alumno
+	       internalFrameConsultasAlumnos= new JInternalFrame("Buscar Alumno");
+	       internalFrameConsultasAlumnos.getContentPane().setLayout(null);
+	       internalFrameConsultasAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
+	       internalFrameConsultasAlumnos.setClosable(true);
+	       internalFrameConsultasAlumnos.setMaximizable(true);
+	       internalFrameConsultasAlumnos.setIconifiable(true);
+	       internalFrameConsultasAlumnos.setResizable(true);
+	       internalFrameConsultasAlumnos.setSize(630,500);
 	       
 	       
+	       
+	       
+	       
+	       desktopPane.add(internalFrameModificarAlumnos);
 	       
 	        
 	       

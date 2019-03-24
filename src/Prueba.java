@@ -231,6 +231,9 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          bajaBtnBuscar=new JButton();
 	          bajaBtnBuscar.setBounds(320, 70, 100, 40);
+
+	          bajaBtnBuscar.setIcon(new ImageIcon("./src/iconoDeBusqueda.png"));
+	          bajaBtnBuscar.addActionListener(this);
 	          internalFrameBajasAlumnos.add(bajaBtnBuscar);
 	          
 	          bajaBtnBorrar = new JButton("BORRAR");
@@ -354,6 +357,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          modificarBtnBuscar=new JButton();
 	          modificarBtnBuscar.setBounds(320, 70, 100, 40);
+	          modificarBtnBuscar.setIcon(new ImageIcon("./src/iconoDeBusqueda.png"));
 	          internalFrameModificarAlumnos.add(modificarBtnBuscar);
 	          
 	          modificarBtnBorrar = new JButton("BORRAR");
@@ -532,6 +536,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       
 	          consultarBtnBuscar=new JButton();
 	          consultarBtnBuscar.setBounds(480, 125, 100, 40);
+	          consultarBtnBuscar.setIcon(new ImageIcon("./src/iconoDeBusqueda.png"));
 	          internalFrameConsultasAlumnos.add(consultarBtnBuscar);
 	          
 	          consultarBtnBorrar=new JButton("BORRAR");

@@ -336,7 +336,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	    
 	       //componentes del internalFrameAltaAlumnos
 	       JPanel panelModificarAlumnos=new JPanel();
-	          panelModificarAlumnos.setBackground(Color.PINK);
+	          panelModificarAlumnos.setBackground(new Color(255,128,0));
 	          panelModificarAlumnos.setSize(630,60);
 	          panelModificarAlumnos.setLayout(null);
 	          
@@ -606,6 +606,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 		}if(radioCarrera.isSelected()) {
 			activarComponentes(consultaComboCarrera);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre);
+		}if(e.getSource()==bajaBtnBuscar) {
+			activarComponentes(bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera);
 		}
 		
 	}

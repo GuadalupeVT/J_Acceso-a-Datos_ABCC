@@ -492,6 +492,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 	  		  consultaCajaNombres=new JTextField();
 	          consultaCajaNombres.setBounds(280,110,150,30);
 	          internalFrameConsultasAlumnos.add(consultaCajaNombres);
+	          
+	          consultaCajaApPaterno=new JTextField();
+	          consultaCajaApPaterno.setBounds(280,150,150,30);
+	          internalFrameConsultasAlumnos.add(consultaCajaApPaterno);
 	       
 	       
 	       

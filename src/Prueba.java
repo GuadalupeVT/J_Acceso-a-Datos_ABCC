@@ -13,7 +13,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos;
 	JTextField altaCajaNumControl, altaCajaNombres, altaCajaApPaterno, altaCajaApMaterno;
 	JTextField bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno;
-	JComboBox altaComboSemestre, altaComboCarrera;
+	JComboBox altaComboSemestre, altaComboCarrera, bajaComboCarrera;
 	JButton altaBtnAgregar, altaBtnBorrar, altaBtnCancelar;
 	JButton bajaBtnBuscar, bajaBtnBorrar, bajaBtnEliminar, bajaBtnCancelar;
 	JSpinner bajasSpinnerSemestre;
@@ -258,6 +258,18 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          bajasSpinnerSemestre.setBounds(210,250,150,30);
 	          internalFrameBajasAlumnos.add(bajasSpinnerSemestre);
 	          
+	          JLabel bajasCarrera=new JLabel("CARRERA:");
+	          bajasCarrera.setBounds(60,290,120,30);
+	          internalFrameBajasAlumnos.add(bajasCarrera);
+	          
+	          bajaComboCarrera= new JComboBox();
+	        	  bajaComboCarrera.addItem("ISC");
+	        	  bajaComboCarrera.addItem("IM");
+	        	  bajaComboCarrera.addItem("III");
+	        	  bajaComboCarrera.addItem("CP");
+	        	  bajaComboCarrera.addItem("LA");
+	          bajaComboCarrera.setBounds(210,290,150,30);
+	          internalFrameBajasAlumnos.add(bajaComboCarrera);
 	          
 	          JPanel panelTabla1=new JPanel();
 	          panelTabla1.setSize(580,70);

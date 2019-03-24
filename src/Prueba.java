@@ -467,47 +467,57 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          radioTodos=new JRadioButton("TODOS");
 	  		  bg.add(radioTodos);
 	  		  radioTodos.setBounds(20,110,80,30);
+	  		  radioTodos.addActionListener(this);
 	  		  internalFrameConsultasAlumnos.add(radioTodos);
 	  		  
 	  		  radioNombre=new JRadioButton("NOMBRE");
 	  		  bg.add(radioNombre);
 	  		  radioNombre.setBounds(120,110,80,30);
+	  		  radioNombre.addActionListener(this);
 	  		  internalFrameConsultasAlumnos.add(radioNombre);
 	  		  
 	  		  radioApPaterno=new JRadioButton("APELLIDO PATERNO");
 	  		  bg.add(radioApPaterno);
 	  		  radioApPaterno.setBounds(120,150,150,30);
+	  		  radioApPaterno.addActionListener(this);
 	  		  internalFrameConsultasAlumnos.add(radioApPaterno);
 	  		  
 	  		  radioApMaterno=new JRadioButton("APELLIDO MATERNO");
 	  		  bg.add(radioApMaterno);
 	  		  radioApMaterno.setBounds(120,190,150,30);
+	  		  radioApMaterno.addActionListener(this);
 	  		  internalFrameConsultasAlumnos.add(radioApMaterno);
 	       
 	  		  radioSemestre=new JRadioButton("SEMESTRE");
 	  		  bg.add(radioSemestre);
 	  		  radioSemestre.setBounds(120,230,100,30);
+	  		  radioSemestre.addActionListener(this);
 	  		  internalFrameConsultasAlumnos.add(radioSemestre);
 	  		  
 	  		  radioCarrera=new JRadioButton("CARRERA");
 	  		  bg.add(radioCarrera);
 	  		  radioCarrera.setBounds(120,270,100,30);
+	  		  radioCarrera.addActionListener(this);
 	  		  internalFrameConsultasAlumnos.add(radioCarrera);
 	  		  
 	  		  consultaCajaNombres=new JTextField();
 	          consultaCajaNombres.setBounds(280,110,150,30);
+	          consultaCajaNombres.setEnabled(false);
 	          internalFrameConsultasAlumnos.add(consultaCajaNombres);
 	          
 	          consultaCajaApPaterno=new JTextField();
 	          consultaCajaApPaterno.setBounds(280,150,150,30);
+	          consultaCajaApPaterno.setEnabled(false);
 	          internalFrameConsultasAlumnos.add(consultaCajaApPaterno);
 	          
 	          consultaCajaApMaterno=new JTextField();
 	          consultaCajaApMaterno.setBounds(280,190,150,30);
+	          consultaCajaApMaterno.setEnabled(false);
 	          internalFrameConsultasAlumnos.add(consultaCajaApMaterno);
 	          
 	          consultaSpinnerSemestre=new JSpinner();
 	          consultaSpinnerSemestre.setBounds(280,230,150,30);
+	          consultaSpinnerSemestre.setEnabled(false);
 	          internalFrameConsultasAlumnos.add(consultaSpinnerSemestre);
 	       
 	          consultaComboCarrera= new JComboBox();
@@ -517,6 +527,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          consultaComboCarrera.addItem("CP");
 	          consultaComboCarrera.addItem("LA");
 	          consultaComboCarrera.setBounds(280,270,150,30);
+	          consultaComboCarrera.setEnabled(false);
 	          internalFrameConsultasAlumnos.add(consultaComboCarrera);
 	       
 	          consultarBtnBuscar=new JButton();
@@ -573,21 +584,46 @@ class VentanaInicio extends JFrame implements ActionListener{
 			internalFrameModificarAlumnos.setVisible(true);
 		}if(e.getSource()==itemConsultasAlumnos ) {
 			internalFrameConsultasAlumnos.setVisible(true);
+		}if(radioTodos.isSelected()) {
+			activarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+		}if(radioNombre.isSelected()) {
+			activarComponentes(consultaCajaNombres);
+			desactivarComponentes(consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+		}if(radioApPaterno.isSelected()) {
+			activarComponentes(consultaCajaApPaterno);
+			desactivarComponentes(consultaCajaNombres,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+		}if(radioApMaterno.isSelected()) {
+			activarComponentes(consultaCajaApMaterno);
+			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaSpinnerSemestre,consultaComboCarrera);
+		}if(radioSemestre.isSelected()) {
+			activarComponentes(consultaSpinnerSemestre);
+			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera);
+		}if(radioCarrera.isSelected()) {
+			activarComponentes(consultaComboCarrera);
+			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre);
 		}
 		
 	}
 	
-	public void reestablecerComponentes(JComponent ...componentes) {
+	public void activarComponentes(JComponent ...componentes) {
 		for (JComponent c : componentes) {
-			System.out.println(c.getClass());
 			if(c instanceof JTextField)
-
-			if (c instanceof JTextField)
-				((JTextField)c).setText("");
-			else if(c instanceof JComboBox) {
-				((JComboBox)c).setSelectedIndex(0);
-			}
+               c.setEnabled(true);
+			if (c instanceof JSpinner)
+				c.setEnabled(true);
+			if(c instanceof JComboBox) 
+				c.setEnabled(true);
 		}
+	}
+		public void desactivarComponentes(JComponent ...componentes) {
+			for (JComponent c : componentes) {
+				if(c instanceof JTextField)
+	               c.setEnabled(false);
+				if (c instanceof JSpinner)
+					c.setEnabled(false);
+				if(c instanceof JComboBox) 
+					c.setEnabled(false);
+			}
 	}
 	
 }//class VentanaInicio

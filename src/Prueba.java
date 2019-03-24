@@ -12,8 +12,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
 	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos;
 	JTextField altaCajaNumControl, altaCajaNombres, altaCajaApPaterno, altaCajaApMaterno;
+	JTextField bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno;
 	JComboBox altaComboSemestre, altaComboCarrera;
 	JButton altaBtnAgregar, altaBtnBorrar, altaBtnCancelar;
+	JButton bajaBtnBuscar, bajaBtnBorrar, bajaBtnEliminar, bajaBtnCancelar;
 	JTable altaTabla, bajaTabla;
 	DefaultTableModel altaModelo, bajaModelo;
 	
@@ -202,8 +204,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          JLabel baja=new JLabel("<html> <p style=\"color:white;\">BAJAS ALUMNOS</p></html>");
 	          baja.setBounds(20,0,300,70);
 	          baja.setFont(new Font ("Segoe Script", 523, 25));
-	          panelBajasAlumnos.add(alta); 
-	       internalFrameAltaAlumnos.add(panelBajasAlumnos);
+	          panelBajasAlumnos.add(baja); 
+	          internalFrameBajasAlumnos.add(panelBajasAlumnos);
 	       
 	       
 	         
@@ -211,6 +213,23 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          panelTabla1.setSize(580,70);
 	          panelTabla1.setLayout(null);
 	          panelTabla1.setBounds(20,300,580,150);
+	          
+	          JLabel bajasNumControl=new JLabel("NUMERO DE CONTROL:");
+	          bajasNumControl.setBounds(60,80,140,30);
+	          internalFrameBajasAlumnos.add(bajasNumControl);
+	          
+	          bajasCajaNumControl=new JTextField();
+	          bajasCajaNumControl.setBounds(200,80,80,30);
+	          internalFrameBajasAlumnos.add(bajasCajaNumControl);
+	          
+	          bajaBtnBuscar=new JButton();
+	          bajaBtnBuscar.setBounds(320, 80, 100, 40);
+	          internalFrameBajasAlumnos.add(bajaBtnBuscar);
+	          
+	          bajaBtnBorrar = new JButton("BORRAR");
+	          bajaBtnBorrar.setBounds(450, 85, 100, 25);
+	          internalFrameBajasAlumnos.add(bajaBtnBorrar);
+	          
 	          
 	          Object[][] data1=new Object[0][0];
 	          Object [] fila1=new Object[6];
@@ -229,6 +248,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          panelTabla1.add(scroll1);
 	          internalFrameBajasAlumnos.add(panelTabla1);
 	       desktopPane.add(internalFrameBajasAlumnos);
+	       
 	       
 	     //-------------------------------------------------------------------------------
 		    

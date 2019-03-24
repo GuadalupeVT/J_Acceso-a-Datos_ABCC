@@ -19,6 +19,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	JButton altaBtnAgregar, altaBtnBorrar, altaBtnCancelar;
 	JButton bajaBtnBuscar, bajaBtnBorrar, bajaBtnEliminar, bajaBtnCancelar;
 	JButton modificarBtnBuscar, modificarBtnBorrar, modificarBtnGuardar, modificarBtnCancelar;
+	JButton consultarBtnBuscar, consultarBtnBorrar, consultarBtnCancelar;
 	JSpinner bajasSpinnerSemestre, modificarSpinnerSemestre, consultaSpinnerSemestre;
 	JTable altaTabla, bajaTabla, modificarTabla;
 	DefaultTableModel altaModelo, bajaModelo, modificarModelo;
@@ -514,10 +515,13 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          consultaComboCarrera.setBounds(280,270,150,30);
 	          internalFrameConsultasAlumnos.add(consultaComboCarrera);
 	       
+	          consultarBtnBuscar=new JButton();
+	          consultarBtnBuscar.setBounds(480, 130, 100, 40);
+	          internalFrameConsultasAlumnos.add(consultarBtnBuscar);
+	          
+	          
 	       desktopPane.add(internalFrameConsultasAlumnos);
-	       
-	        
-	       
+
 	    desktopPane.setBackground(Color.BLACK);
 	    add(desktopPane, BorderLayout.CENTER);
 	    

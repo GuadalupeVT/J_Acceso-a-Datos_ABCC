@@ -16,6 +16,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	JComboBox altaComboSemestre, altaComboCarrera;
 	JButton altaBtnAgregar, altaBtnBorrar, altaBtnCancelar;
 	JButton bajaBtnBuscar, bajaBtnBorrar, bajaBtnEliminar, bajaBtnCancelar;
+	JSpinner bajasSpinnerSemestre;
 	JTable altaTabla, bajaTabla;
 	DefaultTableModel altaModelo, bajaModelo;
 	
@@ -249,10 +250,19 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          bajasCajaApMaterno.setBounds(210,210,150,30);
 	          internalFrameBajasAlumnos.add(bajasCajaApMaterno);
 	          
+	          JLabel bajasSemestre=new JLabel("SEMESTRE:");
+	          bajasSemestre.setBounds(60,250,120,30);
+	          internalFrameBajasAlumnos.add(bajasSemestre);
+	          
+	          bajasSpinnerSemestre=new JSpinner();
+	          bajasSpinnerSemestre.setBounds(210,250,150,30);
+	          internalFrameBajasAlumnos.add(bajasSpinnerSemestre);
+	          
+	          
 	          JPanel panelTabla1=new JPanel();
 	          panelTabla1.setSize(580,70);
 	          panelTabla1.setLayout(null);
-	          panelTabla1.setBounds(20,300,580,150);
+	          panelTabla1.setBounds(20,330,580,150);
  
 	          Object[][] data1=new Object[0][0];
 	          Object [] fila1=new Object[6];

@@ -523,6 +523,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          consultarBtnBorrar.setBounds(480, 190, 100, 25);
 	          internalFrameConsultasAlumnos.add(consultarBtnBorrar);
 	          
+	          consultarBtnCancelar=new JButton("CANCELAR");
+	          consultarBtnCancelar.setBounds(480, 240, 100, 25);
+	          internalFrameConsultasAlumnos.add(consultarBtnCancelar);
+	          
 	          
 	       desktopPane.add(internalFrameConsultasAlumnos);
 

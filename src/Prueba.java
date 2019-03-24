@@ -241,6 +241,14 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          bajasCajaApPaterno.setBounds(210,170,150,30);
 	          internalFrameBajasAlumnos.add(bajasCajaApPaterno);
 	          
+	          JLabel apMaterno=new JLabel("APELLIDO MATERNO:");
+	          apMaterno.setBounds(60,210,120,30);
+	          internalFrameBajasAlumnos.add(apMaterno);
+	          
+	          bajasCajaApMaterno=new JTextField();
+	          bajasCajaApMaterno.setBounds(210,210,150,30);
+	          internalFrameBajasAlumnos.add(bajasCajaApMaterno);
+	          
 	          JPanel panelTabla1=new JPanel();
 	          panelTabla1.setSize(580,70);
 	          panelTabla1.setLayout(null);

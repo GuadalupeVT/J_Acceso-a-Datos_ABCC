@@ -440,6 +440,17 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       internalFrameConsultasAlumnos.setResizable(true);
 	       internalFrameConsultasAlumnos.setSize(630,500);
 	       
+	       JPanel panelConsultasAlumnos=new JPanel();
+	          panelConsultasAlumnos.setBackground(Color.BLUE);
+	          panelConsultasAlumnos.setSize(630,60);
+	          panelConsultasAlumnos.setLayout(null);
+	          
+	          JLabel consultas=new JLabel("<html> <p style=\"color:white;\">CONSULTAS ALUMNOS</p></html>");
+	          consultas.setBounds(20,0,400,60);
+	          consultas.setFont(new Font ("Segoe Script", 523, 23));
+	          panelConsultasAlumnos.add(consultas); 
+	          internalFrameConsultasAlumnos.add(panelConsultasAlumnos);
+	       
 	       
 	       
 	       

@@ -51,6 +51,9 @@ class VentanaInicio extends JFrame implements ActionListener{
 		    menuPrincipalAlumnos.add(itemCambiosAlumnos);
 		    
 		    itemConsultasAlumnos=new JMenuItem("Buscar");
+		       itemConsultasAlumnos.addActionListener(this);
+	           itemConsultasAlumnos.setMnemonic(KeyEvent.VK_B);
+	           itemConsultasAlumnos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.ALT_MASK));
 		    menuPrincipalAlumnos.add(itemConsultasAlumnos);
 		
 		menuBar.add(menuPrincipalAlumnos);
@@ -441,7 +444,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       
 	       
 	       
-	       desktopPane.add(internalFrameModificarAlumnos);
+	       desktopPane.add(internalFrameConsultasAlumnos);
 	       
 	        
 	       
@@ -460,6 +463,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 			internalFrameBajasAlumnos.setVisible(true);
 		}if(e.getSource()==itemCambiosAlumnos ) {
 			internalFrameModificarAlumnos.setVisible(true);
+		}if(e.getSource()==itemConsultasAlumnos ) {
+			internalFrameConsultasAlumnos.setVisible(true);
 		}
 		
 	}

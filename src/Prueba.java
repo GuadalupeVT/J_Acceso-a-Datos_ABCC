@@ -21,6 +21,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 	JSpinner bajasSpinnerSemestre, modificarSpinnerSemestre;
 	JTable altaTabla, bajaTabla, modificarTabla;
 	DefaultTableModel altaModelo, bajaModelo, modificarModelo;
+	JRadioButton radioTodos,radioNombre,radioApPaterno,radioApMaterno,radioSemestre,radioCarrera;
+	ButtonGroup bg;
 	
 	public VentanaInicio() {
 		getContentPane().setLayout(new BorderLayout());
@@ -450,8 +452,41 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          consultas.setFont(new Font ("Segoe Script", 523, 23));
 	          panelConsultasAlumnos.add(consultas); 
 	          internalFrameConsultasAlumnos.add(panelConsultasAlumnos);
+	          
+	          JLabel criterio=new JLabel("Selecciona criterio de busqueda:");
+	          criterio.setBounds(20,70,200,30);
+	          internalFrameConsultasAlumnos.add(criterio);
 	       
+	          bg= new ButtonGroup();
+	          radioTodos=new JRadioButton("TODOS");
+	  		  bg.add(radioTodos);
+	  		  radioTodos.setBounds(20,110,80,30);
+	  		  internalFrameConsultasAlumnos.add(radioTodos);
+	  		  
+	  		  radioNombre=new JRadioButton("NOMBRE");
+	  		  bg.add(radioNombre);
+	  		  radioNombre.setBounds(120,110,80,30);
+	  		  internalFrameConsultasAlumnos.add(radioNombre);
+	  		  
+	  		  radioApPaterno=new JRadioButton("APELLIDO PATERNO");
+	  		  bg.add(radioApPaterno);
+	  		  radioApPaterno.setBounds(120,150,150,30);
+	  		  internalFrameConsultasAlumnos.add(radioApPaterno);
+	  		  
+	  		  radioApMaterno=new JRadioButton("APELLIDO MATERNO");
+	  		  bg.add(radioApMaterno);
+	  		  radioApMaterno.setBounds(120,190,150,30);
+	  		  internalFrameConsultasAlumnos.add(radioApMaterno);
 	       
+	  		  radioSemestre=new JRadioButton("SEMESTRE");
+	  		  bg.add(radioSemestre);
+	  		  radioSemestre.setBounds(120,230,100,30);
+	  		  internalFrameConsultasAlumnos.add(radioSemestre);
+	  		  
+	  		  radioCarrera=new JRadioButton("CARRERA");
+	  		  bg.add(radioCarrera);
+	  		  radioCarrera.setBounds(120,270,100,30);
+	  		  internalFrameConsultasAlumnos.add(radioCarrera);
 	       
 	       
 	       

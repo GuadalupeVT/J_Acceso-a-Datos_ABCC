@@ -271,6 +271,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          bajaComboCarrera.setBounds(210,290,150,30);
 	          internalFrameBajasAlumnos.add(bajaComboCarrera);
 	          
+	          bajaBtnEliminar=new JButton("ELIMINAR");
+	          bajaBtnEliminar.setBounds(450, 175, 100, 25);
+	          internalFrameBajasAlumnos.add(bajaBtnEliminar);
+	          
 	          JPanel panelTabla1=new JPanel();
 	          panelTabla1.setSize(580,70);
 	          panelTabla1.setLayout(null);

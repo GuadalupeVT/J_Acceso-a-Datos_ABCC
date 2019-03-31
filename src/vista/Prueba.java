@@ -2,6 +2,9 @@ package vista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import controlador.AlumnoDAO;
+import modelo.Alumno;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -162,6 +165,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          altaBtnAgregar=new JButton("AGREGAR");
 	          altaBtnAgregar.setBounds(400,120,100,25);
+	          altaBtnAgregar.addActionListener(this);
 	          internalFrameAltaAlumnos.add(altaBtnAgregar);
 	          
 	          altaBtnBorrar=new JButton("BORRAR");
@@ -582,6 +586,20 @@ class VentanaInicio extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		AlumnoDAO alumnoDAO=new AlumnoDAO();
+		if(e.getSource()==altaBtnAgregar) {
+			Alumno alumno=new Alumno();
+		    alumno.setNumControl(altaCajaNumControl.getText());
+			alumno.setNombre(altaCajaNombres.getText());
+			alumno.setPrimerAp(altaCajaApPaterno.getText());
+			alumno.setSegundoAp(altaCajaApMaterno.getText());
+		    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
+			alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
+	
+			System.out.println(alumno);
+		   System.out.println(alumnoDAO.agregarAlumno(alumno));
+		}
+		
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
 		}if(e.getSource()==itemBajaAlumnos ) {
@@ -610,6 +628,9 @@ class VentanaInicio extends JFrame implements ActionListener{
 		}if(e.getSource()==bajaBtnBuscar) {
 			activarComponentes(bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera);
 		}
+		
+		//Boton agregar alumnos
+		
 		
 	}
 	

@@ -11,16 +11,14 @@ public class AlumnoDAO {
 	//metodos que permiten realizar las Altas, Bajas, Cambios y Consultas
 	
 	public boolean agregarAlumno(Alumno a) {
-		String sql="INSERT INTO Alumnos VALUES(\"1\",\"1\",\"1\",\"1\",1,1,\"1\")";
-		String sql2="INSERT INTO Alumnos VALUES('2','2','2','2',2,2,'2')";
-		String sql3="INSERT INTO Alumnos VALUES('"+a.getNumControl()
+		String sql="INSERT INTO Alumnos VALUES('"+a.getNumControl()
 		+"', '"+a.getNombre()
 		+"', '"+a.getPrimerAp()
-		+"', '"+a.getPrimerAp()
-		+", "+a.getSemetre()
+		+"', '"+a.getSegundoAp()
+		+"', "+a.getSemetre()
 		+", '"+a.getCarrera()+"')";
 		ConexionBD conexion=new ConexionBD();
-		return conexion.ejecutarInstruccion(sql3);
+		return conexion.ejecutarInstruccion(sql);
 	}
 	
 	public boolean eliminarAlumnos(String nc) {

@@ -68,14 +68,6 @@ class VentanaInicio extends JFrame implements ActionListener{
 	        
 	   
 	    setJMenuBar(menuBar);
-	   /* JToolBar toolBar=new JToolBar();
-	       toolBar.add(new JButton("A"));
-	       toolBar.add(new JButton("B"));
-	       toolBar.add(new JButton("C"));
-	       toolBar.add(new JButton("Co"));
-	    add(toolBar,BorderLayout.PAGE_START);*/
-		
-		
 	    //INTERNAL FRAMES ---------------------------------------
 	    JDesktopPane desktopPane=new JDesktopPane();
 	    
@@ -170,10 +162,12 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          altaBtnBorrar=new JButton("BORRAR");
 	          altaBtnBorrar.setBounds(400,180,100,25);
+	          altaBtnBorrar.addActionListener(this);
 	          internalFrameAltaAlumnos.add(altaBtnBorrar);
 	          
 	          altaBtnCancelar=new JButton("CANCELAR");
 	          altaBtnCancelar.setBounds(400,230,100,25);
+	          altaBtnCancelar.addActionListener(this);
 	          internalFrameAltaAlumnos.add(altaBtnCancelar);
 	         
 	          JPanel panelTabla=new JPanel();
@@ -587,6 +581,8 @@ class VentanaInicio extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		AlumnoDAO alumnoDAO=new AlumnoDAO();
+		//Ventana Alta
+		  //Boton agregar
 		if(e.getSource()==altaBtnAgregar) {
 			Alumno alumno=new Alumno();
 		    alumno.setNumControl(altaCajaNumControl.getText());
@@ -595,9 +591,12 @@ class VentanaInicio extends JFrame implements ActionListener{
 			alumno.setSegundoAp(altaCajaApMaterno.getText());
 		    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
 			alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
-	
 			System.out.println(alumno);
 		   System.out.println(alumnoDAO.agregarAlumno(alumno));
+		}
+		   //Boton borrar
+		if (e.getSource()==altaBtnBorrar) {
+			limpiarComponentes(altaCajaNumControl,altaCajaNombres,altaCajaApPaterno,altaCajaApMaterno,altaComboSemestre,altaComboCarrera);
 		}
 		
 		if (e.getSource()==itemAltaAlumnos) {
@@ -654,6 +653,17 @@ class VentanaInicio extends JFrame implements ActionListener{
 					c.setEnabled(false);
 			}
 	}
+		
+		public void limpiarComponentes(JComponent ...componentes) {
+			for (JComponent c : componentes) {
+				if(c instanceof JTextField)
+	               ((JTextField) c).setText("");
+				if (c instanceof JSpinner)
+					((JSpinner) c).setValue(0);
+				if(c instanceof JComboBox) 
+					((JComboBox) c).setSelectedIndex(0);
+			}
+		}
 	
 }//class VentanaInicio
 public class Prueba {

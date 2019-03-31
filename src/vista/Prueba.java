@@ -597,6 +597,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 		   //Boton borrar
 		if (e.getSource()==altaBtnBorrar) {
 			limpiarComponentes(altaCajaNumControl,altaCajaNombres,altaCajaApPaterno,altaCajaApMaterno,altaComboSemestre,altaComboCarrera);
+		}  
+		   //Boton cancelar
+		if (e.getSource()==altaBtnCancelar) {
+			internalFrameAltaAlumnos.setVisible(false);
 		}
 		
 		if (e.getSource()==itemAltaAlumnos) {

@@ -346,10 +346,12 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          modificarBtnBuscar=new JButton();
 	          modificarBtnBuscar.setBounds(320, 70, 100, 40);
 	          modificarBtnBuscar.setIcon(new ImageIcon("./src/iconoDeBusqueda.png"));
+	          modificarBtnBuscar.addActionListener(this);
 	          internalFrameModificarAlumnos.add(modificarBtnBuscar);
 	          
 	          modificarBtnBorrar = new JButton("BORRAR");
 	          modificarBtnBorrar.setBounds(450, 75, 100, 25);
+	          modificarBtnBorrar.addActionListener(this);
 	          internalFrameModificarAlumnos.add(modificarBtnBorrar);
 	          
 	          JLabel modificarNombres = new JLabel("NOMBRE(S):");
@@ -398,12 +400,18 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          modificarComboCarrera.setBounds(210,290,150,30);
 	          internalFrameModificarAlumnos.add(modificarComboCarrera);
 	          
+	          cambioMensaje = new JLabel();
+	          cambioMensaje.setBounds(400,120,200,50);
+	          internalFrameModificarAlumnos.add(cambioMensaje);
+	          
 	          modificarBtnGuardar=new JButton("GUARDAR CAMBIOS");
 	          modificarBtnGuardar.setBounds(450, 175, 150, 25);
+	          modificarBtnGuardar.addActionListener(this);
 	          internalFrameModificarAlumnos.add(modificarBtnGuardar);
 	          
 	          modificarBtnCancelar=new JButton("CANCELAR");
 	          modificarBtnCancelar.setBounds(450, 240, 150, 25);
+	          modificarBtnCancelar.addActionListener(this);
 	          internalFrameModificarAlumnos.add(modificarBtnCancelar);
 	          
 	          JPanel panelTabla2=new JPanel();
@@ -630,6 +638,17 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			eliminarAlumno();
 			actualizarTabla(bajaTabla);
 		}
+		
+		//Ventana Modificar
+		  //Boton buscar
+		if(e.getSource()==modificarBtnBuscar)
+			buscarAlumno(cambioMensaje, modificarCajaNumControl, modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera);
+		  //Boton borrar
+		if (e.getSource()==bajaBtnBorrar)
+			limpiarComponentes(bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera,bajaMensaje);
+		  //Boton cancelar
+		if (e.getSource()==bajaBtnCancelar)
+			internalFrameBajasAlumnos.setVisible(false);
 		
 		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {

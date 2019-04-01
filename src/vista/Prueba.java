@@ -739,13 +739,11 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				consultaTabla.setVisible(true);
 			}
 			if(radioTodos.isSelected()) {
-				String sql="SELECT * FROM Alumnos WHERE Nombres='"
-			                +consultaCajaNombres.getText()
-			                +"' AND PrimerAp='"+consultaCajaApPaterno.getText()
-			                +"' AND SegundoAp='"+consultaCajaApMaterno.getText()
-			                +"' AND Semestre="+consultaSpinnerSemestre.getValue() 
-			                +"AND Carrera='"+consultaComboCarrera.getSelectedItem()+"'";
-				actualizarTabla(consultaTabla,sql);
+				AlumnoDAO aDAO=new AlumnoDAO();
+				ArrayList lista =aDAO.buscarAlumnos(consultaCajaNombres.getText(),consultaCajaApPaterno.getText(),
+						consultaCajaApMaterno.getText(),
+						(byte)Integer.parseInt(consultaSpinnerSemestre.getValue().toString()),
+						consultaComboCarrera.getSelectedItem().toString());
 				consultaTabla.setVisible(true);
 			}
 		}
@@ -838,7 +836,8 @@ public class Prueba {
 			@Override
 			public void run() {
 				new VentanaInicio();
-				
+				AlumnoDAO aDAO= new AlumnoDAO();
+				System.out.println(aDAO.buscarAlumnos("Mariana","Rodriguez","Lopez",(byte)2,"IM"));
 			}
 		});
 	}

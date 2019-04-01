@@ -64,9 +64,14 @@ public class AlumnoDAO {
 		}
 		//=================== BUSCAR MULTIPLES REGISTROS ===================
 		
-		public ArrayList <Alumno> buscarAlumnos(String filtro){
+		public ArrayList <Alumno> buscarAlumnos(String nombre,String primerAp,String segundoAp,byte semestre,String carrera){
 			ArrayList <Alumno> listaAlumnos=new ArrayList();
-			String sql = "SELECT * FROM Alumnos WHERE";
+			String sql="SELECT * FROM Alumnos WHERE " +
+			"Nombres='"+nombre
+			+"' AND PrimerAp='"+primerAp
+			+"' AND SegundoAp='"+segundoAp
+			+"' AND Semestre="+semestre
+			+" AND Carrera='"+carrera+"'";
 			//RECORRER el ResultSet mientas haya registros
 			ConexionBD conexion = new ConexionBD();
 			ResultSet rs=conexion.ejecutarConsultaRegistros(sql);

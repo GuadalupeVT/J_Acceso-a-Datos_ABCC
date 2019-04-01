@@ -590,6 +590,18 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			bajaMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO ELIMINAR ALUMNO</p></html>");
 	}
 	
+	public void modificarAlumno() {
+		AlumnoDAO alumnoDAO=new AlumnoDAO();
+		Alumno alumno=new Alumno();
+	    alumno.setNumControl(modificarCajaNumControl.getText());
+		alumno.setNombre(modificarCajaNombres.getText());
+		alumno.setPrimerAp(modificarCajaApPaterno.getText());
+		alumno.setSegundoAp(modificarCajaApMaterno.getText());
+	    alumno.setSemetre((byte)Integer.parseInt(modificarSpinnerSemestre.getValue().toString()));
+		alumno.setCarrera(modificarComboCarrera.getSelectedItem().toString());
+	   System.out.println(alumnoDAO.modificarAlumno(alumno));
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -644,11 +656,12 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		if(e.getSource()==modificarBtnBuscar)
 			buscarAlumno(cambioMensaje, modificarCajaNumControl, modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera);
 		  //Boton borrar
-		if (e.getSource()==bajaBtnBorrar)
-			limpiarComponentes(bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera,bajaMensaje);
+		if (e.getSource()==modificarBtnBorrar)
+			limpiarComponentes(modificarCajaNumControl, modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera,cambioMensaje);
 		  //Boton cancelar
-		if (e.getSource()==bajaBtnCancelar)
-			internalFrameBajasAlumnos.setVisible(false);
+		if (e.getSource()==modificarBtnCancelar)
+			internalFrameAlumnos.setVisible(false);
+		if (e.get)
 		
 		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {

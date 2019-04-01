@@ -660,7 +660,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			limpiarComponentes(modificarCajaNumControl, modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera,cambioMensaje);
 		  //Boton cancelar
 		if (e.getSource()==modificarBtnCancelar)
-			internalFrameAlumnos.setVisible(false);
+			internalFrameModificarAlumnos.setVisible(false);
 		if (e.get)
 		
 		//Activar InternalFrames

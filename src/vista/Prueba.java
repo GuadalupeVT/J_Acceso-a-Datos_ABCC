@@ -1,6 +1,7 @@
 package vista;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 
 import controlador.AlumnoDAO;
 import modelo.Alumno;
@@ -235,6 +236,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          
 	          bajaBtnBorrar = new JButton("BORRAR");
 	          bajaBtnBorrar.setBounds(450, 75, 100, 25);
+	          bajaBtnBorrar.addActionListener(this);
 	          internalFrameBajasAlumnos.add(bajaBtnBorrar);
 	          
 	          JLabel bajaNombres = new JLabel("NOMBRE(S):");
@@ -289,10 +291,12 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          
 	          bajaBtnEliminar=new JButton("ELIMINAR");
 	          bajaBtnEliminar.setBounds(450, 175, 100, 25);
+	          bajaBtnEliminar.addActionListener(this);
 	          internalFrameBajasAlumnos.add(bajaBtnEliminar);
 	          
 	          bajaBtnCancelar=new JButton("CANCELAR");
 	          bajaBtnCancelar.setBounds(450, 240, 100, 25);
+	          bajaBtnCancelar.addActionListener(this);
 	          internalFrameBajasAlumnos.add(bajaBtnCancelar);
 	          
 	          JPanel panelTabla1=new JPanel();
@@ -593,6 +597,23 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		actualizarTabla(altaTabla);
 	}
 	
+	public void bajaBuscarAlumno() {
+		AlumnoDAO aDAO=new AlumnoDAO();
+		Alumno alumno= aDAO.buscarAlumno(bajasCajaNumControl.getText());
+		if(alumno!=null) {
+			bajasCajaNombres.setText(alumno.getNombre());
+			bajasCajaApPaterno.setText(alumno.getPrimerAp());
+			bajasCajaApMaterno.setText(alumno.getSegundoAp());
+			bajasSpinnerSemestre.setValue(alumno.getSemetre());
+			bajaComboCarrera.setSelectedItem(alumno.getCarrera());
+		}
+	}
+	
+	public void eliminarAlumno() {
+		AlumnoDAO alumnoDAO=new AlumnoDAO();
+		System.out.println(alumnoDAO.eliminarAlumnos(bajasCajaNumControl.getText()));
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -626,7 +647,22 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		if (e.getSource()==altaBtnCancelar) {
 			internalFrameAltaAlumnos.setVisible(false);
 		}
+		//Ventana bajas---------------------------------------------------------
+		   //Boton buscar
+		if(e.getSource()==bajaBtnBuscar)
+			bajaBuscarAlumno();
+		  //Boton borrar
+		if (e.getSource()==bajaBtnBorrar)
+			limpiarComponentes(bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera);
+		  //Boton cancelar
+		if (e.getSource()==bajaBtnCancelar)
+			internalFrameAltaAlumnos.setVisible(false);
+		  //Boton borrar
+		if(e.getSource()==bajaBtnEliminar)
+			eliminarAlumno();
 		
+		
+		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
 			actualizarTabla(altaTabla);
@@ -636,7 +672,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			internalFrameModificarAlumnos.setVisible(true);
 		}if(e.getSource()==itemConsultasAlumnos ) {
 			internalFrameConsultasAlumnos.setVisible(true);
-		}if(radioTodos.isSelected()) {
+		}
+		
+		//Ventana consultas-------------------------------------------------------
+		if(radioTodos.isSelected()) {
 			activarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
 		}if(radioNombre.isSelected()) {
 			activarComponentes(consultaCajaNombres);
@@ -653,8 +692,6 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		}if(radioCarrera.isSelected()) {
 			activarComponentes(consultaComboCarrera);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre);
-		}if(e.getSource()==bajaBtnBuscar) {
-			activarComponentes(bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera);
 		}
 		
 		//Boton agregar alumnos
@@ -673,6 +710,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				c.setEnabled(true);
 		}
 	}
+	
 		public void desactivarComponentes(JComponent ...componentes) {
 			for (JComponent c : componentes) {
 				if(c instanceof JTextField)
@@ -726,7 +764,9 @@ public class Prueba {
 				
 			}
 		});
-
+		AlumnoDAO aDao = new AlumnoDAO();
+        System.out.println(aDao.buscarAlumno("12"));
+        System.out.println(aDao.buscarAlumnos("1"));
 	}
 
 }

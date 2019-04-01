@@ -516,14 +516,17 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          consultarBtnBuscar=new JButton();
 	          consultarBtnBuscar.setBounds(480, 125, 100, 40);
 	          consultarBtnBuscar.setIcon(new ImageIcon("./src/iconoDeBusqueda.png"));
+	          consultarBtnBuscar.addActionListener(this);
 	          internalFrameConsultasAlumnos.add(consultarBtnBuscar);
 	          
 	          consultarBtnBorrar=new JButton("BORRAR");
 	          consultarBtnBorrar.setBounds(480, 190, 100, 25);
+	          consultarBtnBorrar.addActionListener(this);
 	          internalFrameConsultasAlumnos.add(consultarBtnBorrar);
 	          
 	          consultarBtnCancelar=new JButton("CANCELAR");
 	          consultarBtnCancelar.setBounds(480, 240, 100, 25);
+	          consultarBtnCancelar.addActionListener(this);
 	          internalFrameConsultasAlumnos.add(consultarBtnCancelar);
 	          
 	          JPanel panelTabla3=new JPanel();
@@ -666,6 +669,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			actualizarTabla(modificarTabla);
 		}
 		
+		
 		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
@@ -700,6 +704,11 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			activarComponentes(consultaComboCarrera);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre);
 		}
+		
+		   //Boton borrar
+		if (e.getSource()==consultarBtnBorrar)
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
+		
 		
 		//Boton agregar alumnos
 		
@@ -739,6 +748,9 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 					((JComboBox) c).setSelectedIndex(0);
 				if(c instanceof JLabel) 
 					((JLabel) c).setText("");
+				//if (c instanceof JTable)
+					
+
 			}
 		}
 		
@@ -752,7 +764,21 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				 } catch (ClassNotFoundException e) {
 					  e.printStackTrace();
 				    } catch (SQLException e) {
-					   altaMensaje.setText("<html> <p style=\"color:red;\">AUN NO HAY REGISTROS</p></html>");
+				    	e.printStackTrace();
+				     }
+				 tabla.setModel(modeloDatos);
+			  }
+		 
+		 public void actualizarTabla(JTable tabla,String consulta) {
+		    	String controlador="com.mysql.cj.jdbc.Driver";
+		    	String url="jdbc:mysql://localhost/BD_Escuela?useTimezone=true&serverTimezone=UTC";
+		    	ResultSetTableModel modeloDatos=null;
+				 try {
+					modeloDatos= new ResultSetTableModel(controlador, url, consulta);
+				 } catch (ClassNotFoundException e) {
+					  e.printStackTrace();
+				    } catch (SQLException e) {
+				    	e.printStackTrace();
 				     }
 				 tabla.setModel(modeloDatos);
 			  }

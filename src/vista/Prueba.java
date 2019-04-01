@@ -579,19 +579,24 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	    
 	}//constructor
 
+	//Como el metodo de altas se usa 2 veces entonces
+	public void altaAlumno() {
+		Alumno alumno=new Alumno();
+		AlumnoDAO alumnoDAO=new AlumnoDAO();
+	    alumno.setNumControl(altaCajaNumControl.getText());
+		alumno.setNombre(altaCajaNombres.getText());
+		alumno.setPrimerAp(altaCajaApPaterno.getText());
+		alumno.setSegundoAp(altaCajaApMaterno.getText());
+	    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
+		alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
+		System.out.println(alumno);
+	   System.out.println(alumnoDAO.agregarAlumno(alumno));
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			Alumno alumno=new Alumno();
-			AlumnoDAO alumnoDAO=new AlumnoDAO();
-		    alumno.setNumControl(altaCajaNumControl.getText());
-			alumno.setNombre(altaCajaNombres.getText());
-			alumno.setPrimerAp(altaCajaApPaterno.getText());
-			alumno.setSegundoAp(altaCajaApMaterno.getText());
-		    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
-			alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
-			System.out.println(alumno);
-		   System.out.println(alumnoDAO.agregarAlumno(alumno));
+			altaAlumno();
 		}
 	}
 
@@ -608,19 +613,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		AlumnoDAO alumnoDAO=new AlumnoDAO();
 		//Ventana Alta --------------------------------------------------------
 		  //Boton agregar
 		if(e.getSource()==altaBtnAgregar || enter) {
-			Alumno alumno=new Alumno();
-		    alumno.setNumControl(altaCajaNumControl.getText());
-			alumno.setNombre(altaCajaNombres.getText());
-			alumno.setPrimerAp(altaCajaApPaterno.getText());
-			alumno.setSegundoAp(altaCajaApMaterno.getText());
-		    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
-			alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
-			System.out.println(alumno);
-		   System.out.println(alumnoDAO.agregarAlumno(alumno));
+			altaAlumno();
 		}
 		   //Boton borrar
 		if (e.getSource()==altaBtnBorrar) {

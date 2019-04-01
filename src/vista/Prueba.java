@@ -708,8 +708,47 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		   //Boton borrar
 		if (e.getSource()==consultarBtnBorrar)
 			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
+		  //Boton cancelar
 		if (e.getSource()==consultarBtnCancelar)
 			internalFrameConsultasAlumnos.setVisible(false);
+		  //Boton buscar
+		if (e.getSource()==consultarBtnBuscar) {
+			if(radioNombre.isSelected()) {
+				String sql= "SELECT * FROM Alumnos WHERE Nombres='"+consultaCajaNombres.getText()+"'";
+				actualizarTabla(consultaTabla,sql);
+			    consultaTabla.setVisible(true);
+			}
+			if(radioApPaterno.isSelected()) {
+				String sql= "SELECT * FROM Alumnos WHERE primerAp='"+consultaCajaApPaterno.getText()+"'";
+				actualizarTabla(consultaTabla,sql);
+				consultaTabla.setVisible(true);
+			}
+			if(radioApMaterno.isSelected()) {
+				String sql= "SELECT * FROM Alumnos WHERE segundoAp='"+consultaCajaApMaterno.getText()+"'";
+				actualizarTabla(consultaTabla,sql);
+				consultaTabla.setVisible(true);
+			}
+			if(radioSemestre.isSelected()) {
+				String sql= "SELECT * FROM Alumnos WHERE Semestre="+consultaSpinnerSemestre.getValue();
+				actualizarTabla(consultaTabla,sql);
+				consultaTabla.setVisible(true);
+			}
+			if(radioCarrera.isSelected()) {
+				String sql= "SELECT * FROM Alumnos WHERE Carrera='"+consultaComboCarrera.getSelectedItem()+"'";
+				actualizarTabla(consultaTabla,sql);
+				consultaTabla.setVisible(true);
+			}
+			if(radioTodos.isSelected()) {
+				String sql="SELECT * FROM Alumnos WHERE Nombres='"
+			                +consultaCajaNombres.getText()
+			                +"' AND PrimerAp='"+consultaCajaApPaterno.getText()
+			                +"' AND SegundoAp='"+consultaCajaApMaterno.getText()
+			                +"' AND Semestre="+consultaSpinnerSemestre.getValue() 
+			                +"AND Carrera='"+consultaComboCarrera.getSelectedItem()+"'";
+				actualizarTabla(consultaTabla,sql);
+				consultaTabla.setVisible(true);
+			}
+		}
 		
 		//Boton agregar alumnos
 		
@@ -725,6 +764,9 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				c.setEnabled(true);
 			if(c instanceof JComboBox) 
 				c.setEnabled(true);
+			if (c instanceof JTable) {
+				 c.setVisible(true);
+			}
 		}
 	}
 	
@@ -749,7 +791,9 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 					((JComboBox) c).setSelectedIndex(0);
 				if(c instanceof JLabel) 
 					((JLabel) c).setText("");
-				//if (c instanceof JTable)
+				if (c instanceof JTable) {
+					 c.setVisible(false);
+				}
 					
 
 			}

@@ -29,7 +29,7 @@ public class AlumnoDAO {
 	
 	public boolean modificarAlumno(Alumno a) {
 		String sql="UPDATE Alumnos SET "
-		+"Nombre='"+a.getNombre()
+		+"Nombres='"+a.getNombre()
 		+"',PrimerAp='"+a.getPrimerAp()
 		+"',SegundoAp='"+a.getPrimerAp()
 		+"',Semestre='"+a.getSemetre()

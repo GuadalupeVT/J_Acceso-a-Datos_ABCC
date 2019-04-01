@@ -577,6 +577,9 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			cajaApMaterno.setText(alumno.getSegundoAp());
 			spinnerSemestre.setValue(alumno.getSemetre());
 			comboCarrera.setSelectedItem(alumno.getCarrera());
+			if(internalFrameModificarAlumnos.isVisible()) {
+				activarComponentes(modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno,modificarSpinnerSemestre,modificarComboCarrera);
+			}
 		}else {
 			mensaje.setText("<html> <p style=\"color:red;\">ESE ALUMNO NO EXISTE</p></html>");
 		}
@@ -599,7 +602,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		alumno.setSegundoAp(modificarCajaApMaterno.getText());
 	    alumno.setSemetre((byte)Integer.parseInt(modificarSpinnerSemestre.getValue().toString()));
 		alumno.setCarrera(modificarComboCarrera.getSelectedItem().toString());
-	   System.out.println(alumnoDAO.modificarAlumno(alumno));
+	   if (alumnoDAO.modificarAlumno(alumno))
+	       cambioMensaje.setText("<html> <p style=\"color:blue;\">SE MODIFICO ALUMNO CORRECTAMENTE</p></html>");
+		else
+			cambioMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO MODIFICAR ALUMNO</p></html>");
 	}
 	
 	@Override
@@ -661,7 +667,8 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		  //Boton cancelar
 		if (e.getSource()==modificarBtnCancelar)
 			internalFrameModificarAlumnos.setVisible(false);
-		if (e.get)
+		if (e.getSource()==modificarBtnGuardar)
+			modificarAlumno();
 		
 		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {

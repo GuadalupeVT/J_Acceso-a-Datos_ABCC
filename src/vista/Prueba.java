@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 class VentanaInicio extends JFrame implements ActionListener, KeyListener{
-	boolean enter;
+	JLabel altaMensaje,bajaMensaje,cambioMensaje;
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
 	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos, internalFrameModificarAlumnos, internalFrameConsultasAlumnos;
@@ -96,6 +96,9 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          panelAltaAlumnos.add(alta); 
 	       internalFrameAltaAlumnos.add(panelAltaAlumnos);
 	       
+	          altaMensaje= new JLabel();
+	          altaMensaje.setBounds(200,60,400,50);
+	          internalFrameAltaAlumnos.add(altaMensaje);
 	       
 	          JLabel numControl=new JLabel("NUMERO DE CONTROL:");
 	          numControl.setBounds(100, 100, 150, 50);
@@ -589,8 +592,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		alumno.setSegundoAp(altaCajaApMaterno.getText());
 	    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
 		alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
-		System.out.println(alumno);
-	   System.out.println(alumnoDAO.agregarAlumno(alumno));
+		if(alumnoDAO.agregarAlumno(alumno)) 
+			altaMensaje.setText("<html> <p style=\"color:blue;\">ALTA REALIZADA CORRECTAMENTE</p></html>");
+		else
+			altaMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO REALIZAR EL ALTA</p></html>");
 	}
 	
 	@Override
@@ -615,12 +620,12 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		//Ventana Alta --------------------------------------------------------
 		  //Boton agregar
-		if(e.getSource()==altaBtnAgregar || enter) {
+		if(e.getSource()==altaBtnAgregar) {
 			altaAlumno();
 		}
 		   //Boton borrar
 		if (e.getSource()==altaBtnBorrar) {
-			limpiarComponentes(altaCajaNumControl,altaCajaNombres,altaCajaApPaterno,altaCajaApMaterno,altaComboSemestre,altaComboCarrera);
+			limpiarComponentes(altaCajaNumControl,altaCajaNombres,altaCajaApPaterno,altaCajaApMaterno,altaComboSemestre,altaComboCarrera,altaMensaje);
 		}  
 		   //Boton cancelar
 		if (e.getSource()==altaBtnCancelar) {
@@ -629,7 +634,6 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
-			enter=false;
 		}if(e.getSource()==itemBajaAlumnos ) {
 			internalFrameBajasAlumnos.setVisible(true);
 		}if(e.getSource()==itemCambiosAlumnos ) {
@@ -692,6 +696,8 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 					((JSpinner) c).setValue(0);
 				if(c instanceof JComboBox) 
 					((JComboBox) c).setSelectedIndex(0);
+				if(c instanceof JLabel) 
+					((JLabel) c).setText("");
 			}
 		}
 		

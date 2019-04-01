@@ -9,9 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
-class VentanaInicio extends JFrame implements ActionListener{
-	
+class VentanaInicio extends JFrame implements ActionListener, KeyListener{
+	boolean enter;
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
 	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos, internalFrameModificarAlumnos, internalFrameConsultasAlumnos;
@@ -78,9 +80,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       internalFrameAltaAlumnos.getContentPane().setLayout(null);
 	       internalFrameAltaAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 	       internalFrameAltaAlumnos.setClosable(true);
-	       internalFrameAltaAlumnos.setMaximizable(true);
 	       internalFrameAltaAlumnos.setIconifiable(true);
-	       internalFrameAltaAlumnos.setResizable(true);
 	       internalFrameAltaAlumnos.setSize(630,500);
 	       //internalFrameAltaAlumnos.setVisible(true);
 	    
@@ -153,11 +153,13 @@ class VentanaInicio extends JFrame implements ActionListener{
 	        	  altaComboCarrera.addItem("CP");
 	        	  altaComboCarrera.addItem("LA");
 	          altaComboCarrera.setBounds(230,255,150,20);
+	          altaComboCarrera.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaComboCarrera);
 	          
 	          altaBtnAgregar=new JButton("AGREGAR");
 	          altaBtnAgregar.setBounds(400,120,100,25);
 	          altaBtnAgregar.addActionListener(this);
+	          altaBtnAgregar.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaBtnAgregar);
 	          
 	          altaBtnBorrar=new JButton("BORRAR");
@@ -205,8 +207,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	       internalFrameBajasAlumnos.setIconifiable(true);
 	       internalFrameBajasAlumnos.setResizable(true);
 	       internalFrameBajasAlumnos.setSize(630,500);
-	       //internalFrameAltaAlumnos.setVisible(true);
-	    
+	      
 	       //componentes del internalFrameAltaAlumnos
 	       JPanel panelBajasAlumnos=new JPanel();
 	          panelBajasAlumnos.setBackground(Color.RED);
@@ -579,11 +580,38 @@ class VentanaInicio extends JFrame implements ActionListener{
 	}//constructor
 
 	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			Alumno alumno=new Alumno();
+			AlumnoDAO alumnoDAO=new AlumnoDAO();
+		    alumno.setNumControl(altaCajaNumControl.getText());
+			alumno.setNombre(altaCajaNombres.getText());
+			alumno.setPrimerAp(altaCajaApPaterno.getText());
+			alumno.setSegundoAp(altaCajaApMaterno.getText());
+		    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
+			alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
+			System.out.println(alumno);
+		   System.out.println(alumnoDAO.agregarAlumno(alumno));
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		AlumnoDAO alumnoDAO=new AlumnoDAO();
-		//Ventana Alta
+		//Ventana Alta --------------------------------------------------------
 		  //Boton agregar
-		if(e.getSource()==altaBtnAgregar) {
+		if(e.getSource()==altaBtnAgregar || enter) {
 			Alumno alumno=new Alumno();
 		    alumno.setNumControl(altaCajaNumControl.getText());
 			alumno.setNombre(altaCajaNombres.getText());
@@ -605,6 +633,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 		
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
+			enter=false;
 		}if(e.getSource()==itemBajaAlumnos ) {
 			internalFrameBajasAlumnos.setVisible(true);
 		}if(e.getSource()==itemCambiosAlumnos ) {
@@ -634,8 +663,9 @@ class VentanaInicio extends JFrame implements ActionListener{
 		
 		//Boton agregar alumnos
 		
-		
 	}
+	
+
 	
 	public void activarComponentes(JComponent ...componentes) {
 		for (JComponent c : componentes) {
@@ -668,8 +698,11 @@ class VentanaInicio extends JFrame implements ActionListener{
 					((JComboBox) c).setSelectedIndex(0);
 			}
 		}
-	
+		
+		
 }//class VentanaInicio
+
+
 public class Prueba {
 
 	public static void main(String[] args) {

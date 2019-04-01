@@ -559,18 +559,18 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		actualizarTabla(altaTabla);
 	}
 	
-	public void bajaBuscarAlumno() {
+	public void buscarAlumno(JLabel mensaje,JTextField cajaNumControl,JTextField cajaNombres,JTextField cajaApPaterno, JTextField cajaApMaterno,JSpinner spinnerSemestre, JComboBox comboCarrera) {
 		AlumnoDAO aDAO=new AlumnoDAO();
-		Alumno alumno= aDAO.buscarAlumno(bajasCajaNumControl.getText());
+		Alumno alumno= aDAO.buscarAlumno(cajaNumControl.getText());
 		if(alumno!=null) {
-			limpiarComponentes(bajaMensaje);
-			bajasCajaNombres.setText(alumno.getNombre());
-			bajasCajaApPaterno.setText(alumno.getPrimerAp());
-			bajasCajaApMaterno.setText(alumno.getSegundoAp());
-			bajasSpinnerSemestre.setValue(alumno.getSemetre());
-			bajaComboCarrera.setSelectedItem(alumno.getCarrera());
+			limpiarComponentes(mensaje);
+			cajaNombres.setText(alumno.getNombre());
+			cajaApPaterno.setText(alumno.getPrimerAp());
+			cajaApMaterno.setText(alumno.getSegundoAp());
+			spinnerSemestre.setValue(alumno.getSemetre());
+			comboCarrera.setSelectedItem(alumno.getCarrera());
 		}else {
-			bajaMensaje.setText("<html> <p style=\"color:red;\">ESE ALUMNO NO EXISTE</p></html>");
+			mensaje.setText("<html> <p style=\"color:red;\">ESE ALUMNO NO EXISTE</p></html>");
 		}
 	}
 	
@@ -618,7 +618,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		//Ventana bajas---------------------------------------------------------
 		   //Boton buscar
 		if(e.getSource()==bajaBtnBuscar)
-			bajaBuscarAlumno();
+			buscarAlumno(bajaMensaje, bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno, bajasSpinnerSemestre, bajaComboCarrera);
 		  //Boton borrar
 		if (e.getSource()==bajaBtnBorrar)
 			limpiarComponentes(bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera,bajaMensaje);

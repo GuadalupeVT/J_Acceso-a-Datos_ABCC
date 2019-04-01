@@ -289,6 +289,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          bajaComboCarrera.setEnabled(false);
 	          internalFrameBajasAlumnos.add(bajaComboCarrera);
 	          
+	          bajaMensaje=new JLabel();
+	          bajaMensaje.setBounds(400,120,200,50);
+	          internalFrameBajasAlumnos.add(bajaMensaje);
+	          
 	          bajaBtnEliminar=new JButton("ELIMINAR");
 	          bajaBtnEliminar.setBounds(450, 175, 100, 25);
 	          bajaBtnEliminar.addActionListener(this);
@@ -601,17 +605,23 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		AlumnoDAO aDAO=new AlumnoDAO();
 		Alumno alumno= aDAO.buscarAlumno(bajasCajaNumControl.getText());
 		if(alumno!=null) {
+			limpiarComponentes(bajaMensaje);
 			bajasCajaNombres.setText(alumno.getNombre());
 			bajasCajaApPaterno.setText(alumno.getPrimerAp());
 			bajasCajaApMaterno.setText(alumno.getSegundoAp());
 			bajasSpinnerSemestre.setValue(alumno.getSemetre());
 			bajaComboCarrera.setSelectedItem(alumno.getCarrera());
+		}else {
+			bajaMensaje.setText("<html> <p style=\"color:red;\">ESE ALUMNO NO EXISTE</p></html>");
 		}
 	}
 	
 	public void eliminarAlumno() {
 		AlumnoDAO alumnoDAO=new AlumnoDAO();
-		System.out.println(alumnoDAO.eliminarAlumnos(bajasCajaNumControl.getText()));
+		if(alumnoDAO.eliminarAlumnos(bajasCajaNumControl.getText()))
+			bajaMensaje.setText("<html> <p style=\"color:blue;\">SE ELIMINO ALUMNO</p></html>");
+		else
+			bajaMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO ELIMINAR ALUMNO</p></html>");
 	}
 	
 	@Override
@@ -653,10 +663,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			bajaBuscarAlumno();
 		  //Boton borrar
 		if (e.getSource()==bajaBtnBorrar)
-			limpiarComponentes(bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera);
+			limpiarComponentes(bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera,bajaMensaje);
 		  //Boton cancelar
 		if (e.getSource()==bajaBtnCancelar)
-			internalFrameAltaAlumnos.setVisible(false);
+			internalFrameBajasAlumnos.setVisible(false);
 		  //Boton borrar
 		if(e.getSource()==bajaBtnEliminar)
 			eliminarAlumno();

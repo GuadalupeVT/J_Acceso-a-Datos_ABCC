@@ -708,7 +708,8 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		   //Boton borrar
 		if (e.getSource()==consultarBtnBorrar)
 			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
-		
+		if (e.getSource()==consultarBtnCancelar)
+			internalFrameConsultasAlumnos.setVisible(false);
 		
 		//Boton agregar alumnos
 		

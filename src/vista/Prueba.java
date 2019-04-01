@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 class VentanaInicio extends JFrame implements ActionListener, KeyListener{
-	JLabel altaMensaje,bajaMensaje,cambioMensaje;
+	JLabel altaMensaje,bajaMensaje,cambioMensaje, consultaMensaje;
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
 	JInternalFrame internalFrameAltaAlumnos, internalFrameBajasAlumnos, internalFrameModificarAlumnos, internalFrameConsultasAlumnos;
@@ -445,6 +445,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          JLabel criterio=new JLabel("Selecciona criterio de busqueda:");
 	          criterio.setBounds(20,70,200,30);
 	          internalFrameConsultasAlumnos.add(criterio);
+	          
+	          consultaMensaje = new JLabel();
+	          consultaMensaje.setBounds(300,70, 200, 50);
+	          internalFrameConsultasAlumnos.add(consultaMensaje);
 	       
 	          bg= new ButtonGroup();
 	          radioTodos=new JRadioButton("TODOS");
@@ -827,7 +831,14 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				    	e.printStackTrace();
 				     }
 				 tabla.setModel(modeloDatos);
+				 if (modeloDatos.getRowCount()==0) {
+					 consultaMensaje.setText("<html> <p style=\"color:red;\">NO SE ENCONTRARON REGISTROS</p></html>");
+				 }else {
+					 consultaMensaje.setText("");
+				 }
+				 
 			  }
+	
 		
 }//class VentanaInicio
 

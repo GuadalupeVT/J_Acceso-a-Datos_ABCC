@@ -18,6 +18,9 @@ public class ResultSetTableModel extends AbstractTableModel {
    private ResultSetMetaData metaDatos;
    private int numeroDeFilas;
 
+   public ResultSet getConjuntoDeResultados() {
+	   return this.conjuntoResultados;
+   }
    // mantener el registro del estado de la conexión a la base de datos
    private boolean conectadoALaBaseDeDatos = false;
 

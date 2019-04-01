@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 class VentanaInicio extends JFrame implements ActionListener, KeyListener{
@@ -184,14 +185,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          Object [] fila=new Object[6];
 	          String[] datos = {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
 	          
-	          altaModelo=new DefaultTableModel(data,datos);
-	          altaTabla=new JTable(altaModelo);
-	          altaTabla.setBounds(0,0,580,120);
-	          altaModelo.addRow(new Object[]{"","","",""});
-	          altaModelo.addRow(new Object[]{"","","",""});
-	          altaModelo.addRow(new Object[]{"","","",""});
-	          altaModelo.addRow(new Object[]{"","","",""});
-	          altaModelo.addRow(new Object[]{"","","",""});
+	          altaTabla=new JTable();
 	          JScrollPane scroll=new JScrollPane(altaTabla);
 	  		  scroll.setBounds(0,0,580,120);
 	          panelTabla.add(scroll);
@@ -596,6 +590,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			altaMensaje.setText("<html> <p style=\"color:blue;\">ALTA REALIZADA CORRECTAMENTE</p></html>");
 		else
 			altaMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO REALIZAR EL ALTA</p></html>");
+		actualizarTabla(altaTabla);
 	}
 	
 	@Override
@@ -634,6 +629,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
+			actualizarTabla(altaTabla);
 		}if(e.getSource()==itemBajaAlumnos ) {
 			internalFrameBajasAlumnos.setVisible(true);
 		}if(e.getSource()==itemCambiosAlumnos ) {
@@ -701,6 +697,21 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			}
 		}
 		
+		 public void actualizarTabla(JTable tabla) {
+		    	String controlador="com.mysql.cj.jdbc.Driver";
+		    	String url="jdbc:mysql://localhost/BD_Escuela?useTimezone=true&serverTimezone=UTC";
+		    	String consulta="SELECT * FROM Alumnos";
+		    	ResultSetTableModel modeloDatos=null;
+				 try {
+					modeloDatos= new ResultSetTableModel(controlador, url, consulta);
+			    
+				 } catch (ClassNotFoundException e) {
+					  e.printStackTrace();
+				    } catch (SQLException e) {
+					   e.printStackTrace();
+				     }
+				 tabla.setModel(modeloDatos);
+			  }
 		
 }//class VentanaInicio
 

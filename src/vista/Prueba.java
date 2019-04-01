@@ -640,6 +640,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			actualizarTabla(bajaTabla);
 		}if(e.getSource()==itemCambiosAlumnos ) {
 			internalFrameModificarAlumnos.setVisible(true);
+			desactivarComponentes(modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno,modificarSpinnerSemestre,modificarComboCarrera);
 		}if(e.getSource()==itemConsultasAlumnos ) {
 			internalFrameConsultasAlumnos.setVisible(true);
 		}
@@ -733,9 +734,6 @@ public class Prueba {
 				
 			}
 		});
-		AlumnoDAO aDao = new AlumnoDAO();
-        System.out.println(aDao.buscarAlumno("12"));
-        System.out.println(aDao.buscarAlumnos("1"));
 	}
 
 }

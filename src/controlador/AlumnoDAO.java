@@ -66,7 +66,7 @@ public class AlumnoDAO {
 		
 		public ArrayList <Alumno> buscarAlumnos(String filtro){
 			ArrayList <Alumno> listaAlumnos=new ArrayList();
-			String sql = "SELECT * FROM Alumnos";
+			String sql = "SELECT * FROM Alumnos WHERE";
 			//RECORRER el ResultSet mientas haya registros
 			ConexionBD conexion = new ConexionBD();
 			ResultSet rs=conexion.ejecutarConsultaRegistros(sql);

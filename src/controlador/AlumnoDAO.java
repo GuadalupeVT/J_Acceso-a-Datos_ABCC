@@ -31,7 +31,7 @@ public class AlumnoDAO {
 		String sql="UPDATE Alumnos SET "
 		+"Nombres='"+a.getNombre()
 		+"',PrimerAp='"+a.getPrimerAp()
-		+"',SegundoAp='"+a.getPrimerAp()
+		+"',SegundoAp='"+a.getSegundoAp()
 		+"',Semestre='"+a.getSemetre()
 		+"',Carrera='"+a.getCarrera()
 		+"' WHERE NumControl='"+a.getNumControl()+"'";

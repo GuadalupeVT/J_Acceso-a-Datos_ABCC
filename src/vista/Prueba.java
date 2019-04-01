@@ -196,9 +196,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	       internalFrameBajasAlumnos.getContentPane().setLayout(null);
 	       internalFrameBajasAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 	       internalFrameBajasAlumnos.setClosable(true);
-	       internalFrameBajasAlumnos.setMaximizable(true);
 	       internalFrameBajasAlumnos.setIconifiable(true);
-	       internalFrameBajasAlumnos.setResizable(true);
 	       internalFrameBajasAlumnos.setSize(630,500);
 	      
 	       //componentes del internalFrameAltaAlumnos
@@ -317,9 +315,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	       internalFrameModificarAlumnos.getContentPane().setLayout(null);
 	       internalFrameModificarAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 	       internalFrameModificarAlumnos.setClosable(true);
-	       internalFrameModificarAlumnos.setMaximizable(true);
 	       internalFrameModificarAlumnos.setIconifiable(true);
-	       internalFrameModificarAlumnos.setResizable(true);
 	       internalFrameModificarAlumnos.setSize(630,500);
 	       //internalFrameAltaAlumnos.setVisible(true);
 	    
@@ -432,9 +428,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	       internalFrameConsultasAlumnos.getContentPane().setLayout(null);
 	       internalFrameConsultasAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 	       internalFrameConsultasAlumnos.setClosable(true);
-	       internalFrameConsultasAlumnos.setMaximizable(true);
 	       internalFrameConsultasAlumnos.setIconifiable(true);
-	       internalFrameConsultasAlumnos.setResizable(true);
 	       internalFrameConsultasAlumnos.setSize(630,500);
 	       
 	       JPanel panelConsultasAlumnos=new JPanel();
@@ -667,8 +661,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		  //Boton cancelar
 		if (e.getSource()==modificarBtnCancelar)
 			internalFrameModificarAlumnos.setVisible(false);
-		if (e.getSource()==modificarBtnGuardar)
+		if (e.getSource()==modificarBtnGuardar) {
 			modificarAlumno();
+			actualizarTabla(modificarTabla);
+		}
 		
 		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {
@@ -680,6 +676,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		}if(e.getSource()==itemCambiosAlumnos ) {
 			internalFrameModificarAlumnos.setVisible(true);
 			desactivarComponentes(modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno,modificarSpinnerSemestre,modificarComboCarrera);
+			actualizarTabla(modificarTabla);
 		}if(e.getSource()==itemConsultasAlumnos ) {
 			internalFrameConsultasAlumnos.setVisible(true);
 		}

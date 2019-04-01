@@ -30,7 +30,6 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	JButton consultarBtnBuscar, consultarBtnBorrar, consultarBtnCancelar;
 	JSpinner bajasSpinnerSemestre, modificarSpinnerSemestre, consultaSpinnerSemestre;
 	JTable altaTabla, bajaTabla, modificarTabla, consultaTabla;
-	DefaultTableModel altaModelo, bajaModelo, modificarModelo, consultaModelo;
 	JRadioButton radioTodos,radioNombre,radioApPaterno,radioApMaterno,radioSemestre,radioCarrera;
 	ButtonGroup bg;
 	
@@ -182,10 +181,6 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          panelTabla.setLayout(null);
 	          panelTabla.setBounds(20,300,580,150);
 	          
-	          Object[][] data=new Object[0][0];
-	          Object [] fila=new Object[6];
-	          String[] datos = {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
-	          
 	          altaTabla=new JTable();
 	          JScrollPane scroll=new JScrollPane(altaTabla);
 	  		  scroll.setBounds(0,0,580,120);
@@ -308,18 +303,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          panelTabla1.setLayout(null);
 	          panelTabla1.setBounds(20,330,580,150);
  
-	          Object[][] data1=new Object[0][0];
-	          Object [] fila1=new Object[6];
-	          String[] datos1 = {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
-	          
-	          bajaModelo=new DefaultTableModel(data1,datos1);
-	          bajaTabla=new JTable(bajaModelo);
-	          bajaTabla.setBounds(0,0,580,120);
-	          bajaModelo.addRow(new Object[]{"","","",""});
-	          bajaModelo.addRow(new Object[]{"","","",""});
-	          bajaModelo.addRow(new Object[]{"","","",""});
-	          bajaModelo.addRow(new Object[]{"","","",""});
-	          bajaModelo.addRow(new Object[]{"","","",""});
+	          bajaTabla=new JTable();
 	          JScrollPane scroll1=new JScrollPane(bajaTabla);
 	  		  scroll1.setBounds(0,0,580,120);
 	          panelTabla1.add(scroll1);
@@ -350,7 +334,6 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          modificar.setFont(new Font ("Segoe Script", 523, 23));
 	          panelModificarAlumnos.add(modificar); 
 	          internalFrameModificarAlumnos.add(panelModificarAlumnos);
-	       
 	      
 	          JLabel modificarNumControl=new JLabel("NUMERO DE CONTROL:");
 	          modificarNumControl.setBounds(60,70,140,30);
@@ -428,18 +411,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          panelTabla2.setLayout(null);
 	          panelTabla2.setBounds(20,330,580,150);
  
-	          Object[][] data2=new Object[0][0];
-	          Object [] fila2=new Object[6];
-	          String[] datos2= {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
-	          
-	          modificarModelo=new DefaultTableModel(data1,datos1);
-	          modificarTabla=new JTable(modificarModelo);
-	          modificarTabla.setBounds(0,0,580,120);
-	          modificarModelo.addRow(new Object[]{"","","",""});
-	          modificarModelo.addRow(new Object[]{"","","",""});
-	          modificarModelo.addRow(new Object[]{"","","",""});
-	          modificarModelo.addRow(new Object[]{"","","",""});
-	          modificarModelo.addRow(new Object[]{"","","",""});
+	          modificarTabla=new JTable();
 	          JScrollPane scroll2=new JScrollPane(modificarTabla);
 	  		  scroll2.setBounds(0,0,580,120);
 	          panelTabla2.add(scroll2);
@@ -557,18 +529,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          panelTabla3.setLayout(null);
 	          panelTabla3.setBounds(20,330,580,150);
  
-	          Object[][] data3=new Object[0][0];
-	          Object [] fila3=new Object[6];
-	          String[] datos3= {"NO.DE CONTROL","NOMBRES","AP. PATERNO","AP.MATERNO","SEMESTRE","CARRERA"};
-	          
-	          consultaModelo=new DefaultTableModel(data1,datos1);
-	          consultaTabla=new JTable(consultaModelo);
-	          modificarTabla.setBounds(0,0,580,120);
-	          consultaModelo.addRow(new Object[]{"","","",""});
-	          consultaModelo.addRow(new Object[]{"","","",""});
-	          consultaModelo.addRow(new Object[]{"","","",""});
-	          consultaModelo.addRow(new Object[]{"","","",""});
-	          consultaModelo.addRow(new Object[]{"","","",""});
+	          consultaTabla=new JTable();
 	          JScrollPane scroll3=new JScrollPane(consultaTabla);
 	  		  scroll3.setBounds(0,0,580,120);
 	          panelTabla3.add(scroll3);
@@ -580,10 +541,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	    desktopPane.setBackground(Color.BLACK);
 	    add(desktopPane, BorderLayout.CENTER);
 	    
-	   
-	    
 	}//constructor
-
 	//Como el metodo de altas se usa 2 veces entonces
 	public void altaAlumno() {
 		Alumno alumno=new Alumno();
@@ -668,9 +626,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		if (e.getSource()==bajaBtnCancelar)
 			internalFrameBajasAlumnos.setVisible(false);
 		  //Boton borrar
-		if(e.getSource()==bajaBtnEliminar)
+		if(e.getSource()==bajaBtnEliminar) {
 			eliminarAlumno();
-		
+			actualizarTabla(bajaTabla);
+		}
 		
 		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {
@@ -678,6 +637,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			actualizarTabla(altaTabla);
 		}if(e.getSource()==itemBajaAlumnos ) {
 			internalFrameBajasAlumnos.setVisible(true);
+			actualizarTabla(bajaTabla);
 		}if(e.getSource()==itemCambiosAlumnos ) {
 			internalFrameModificarAlumnos.setVisible(true);
 		}if(e.getSource()==itemConsultasAlumnos ) {
@@ -752,11 +712,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		    	ResultSetTableModel modeloDatos=null;
 				 try {
 					modeloDatos= new ResultSetTableModel(controlador, url, consulta);
-			    
 				 } catch (ClassNotFoundException e) {
 					  e.printStackTrace();
 				    } catch (SQLException e) {
-					   e.printStackTrace();
+					   altaMensaje.setText("<html> <p style=\"color:red;\">AUN NO HAY REGISTROS</p></html>");
 				     }
 				 tabla.setModel(modeloDatos);
 			  }

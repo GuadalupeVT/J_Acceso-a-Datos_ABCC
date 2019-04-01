@@ -84,7 +84,7 @@ public class AlumnoDAO {
 				rs.next();
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				
 			}
 			
 			return listaAlumnos;

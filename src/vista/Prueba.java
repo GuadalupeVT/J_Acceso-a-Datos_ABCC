@@ -660,15 +660,27 @@ class VentanaInicio extends JFrame implements ActionListener{
 		//Activar InternalFrames
 		if (e.getSource()==itemAltaAlumnos) {
 			internalFrameAltaAlumnos.setVisible(true);
+			internalFrameBajasAlumnos.setVisible(false);
+			internalFrameModificarAlumnos.setVisible(false);
+			internalFrameConsultasAlumnos.setVisible(false);
 			actualizarTabla(altaTabla);
 		}if(e.getSource()==itemBajaAlumnos ) {
+			internalFrameAltaAlumnos.setVisible(false);
 			internalFrameBajasAlumnos.setVisible(true);
+			internalFrameModificarAlumnos.setVisible(false);
+			internalFrameConsultasAlumnos.setVisible(false);
 			actualizarTabla(bajaTabla);
 		}if(e.getSource()==itemCambiosAlumnos ) {
+			internalFrameAltaAlumnos.setVisible(false);
+			internalFrameBajasAlumnos.setVisible(false);
 			internalFrameModificarAlumnos.setVisible(true);
+			internalFrameConsultasAlumnos.setVisible(false);
 			desactivarComponentes(modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno,modificarSpinnerSemestre,modificarComboCarrera);
 			actualizarTabla(modificarTabla);
 		}if(e.getSource()==itemConsultasAlumnos ) {
+			internalFrameAltaAlumnos.setVisible(false);
+			internalFrameBajasAlumnos.setVisible(false);
+			internalFrameModificarAlumnos.setVisible(false);
 			internalFrameConsultasAlumnos.setVisible(true);
 		}
 		

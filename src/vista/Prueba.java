@@ -14,7 +14,7 @@ import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-class VentanaInicio extends JFrame implements ActionListener{
+class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	JLabel altaMensaje,bajaMensaje,cambioMensaje, consultaMensaje;
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
@@ -107,6 +107,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          altaCajaNumControl=new JTextField();
 	          altaCajaNumControl.setBounds(250,110,130,20);
+	          altaCajaNumControl.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaCajaNumControl);
 	          
 	          JLabel nombres=new JLabel("NOMBRES:");
@@ -115,6 +116,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          altaCajaNombres=new JTextField();
 	          altaCajaNombres.setBounds(180,140,200,20);
+	          altaCajaNombres.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaCajaNombres);
 	          
 	          JLabel apellidoP=new JLabel("APELLIDO PATERNO:");
@@ -123,6 +125,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          altaCajaApPaterno=new JTextField();
 	          altaCajaApPaterno.setBounds(230,170,150,20);
+	          altaCajaApPaterno.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaCajaApPaterno);
 	          
 	          JLabel apellidoM=new JLabel("APELLIDO MATERNO:");
@@ -131,6 +134,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          altaCajaApMaterno=new JTextField();
 	          altaCajaApMaterno.setBounds(230,195,150,20);
+	          altaCajaApMaterno.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaCajaApMaterno);
 	          
 	          JLabel semestre=new JLabel("SEMESTRE:");
@@ -143,6 +147,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	        	  altaComboSemestre.addItem(i);
 	          }
 	          altaComboSemestre.setBounds(230,225,150,20);
+	          altaComboSemestre.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaComboSemestre);
 	          
 	          JLabel carrera=new JLabel("CARRERA:");
@@ -157,17 +162,19 @@ class VentanaInicio extends JFrame implements ActionListener{
 	        	  altaComboCarrera.addItem("CP");
 	        	  altaComboCarrera.addItem("LA");
 	          altaComboCarrera.setBounds(230,255,150,20);
+	          altaComboCarrera.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaComboCarrera);
 	          
 	          altaBtnAgregar=new JButton("AGREGAR");
 	          altaBtnAgregar.setBounds(400,120,100,25);
 	          altaBtnAgregar.addActionListener(this);
-	         // altaBtnAgregar.addKeyListener(this);
+	          altaBtnAgregar.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaBtnAgregar);
 	          
 	          altaBtnBorrar=new JButton("BORRAR");
 	          altaBtnBorrar.setBounds(400,180,100,25);
 	          altaBtnBorrar.addActionListener(this);
+	          altaBtnBorrar.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaBtnBorrar);
 	          
 	          altaBtnCancelar=new JButton("CANCELAR");
@@ -185,12 +192,12 @@ class VentanaInicio extends JFrame implements ActionListener{
 	  		  scroll.setBounds(0,0,580,120);
 	          panelTabla.add(scroll);
 	          internalFrameAltaAlumnos.add(panelTabla);
+	          internalFrameAltaAlumnos.addKeyListener(this);
 	       desktopPane.add(internalFrameAltaAlumnos);
 	       
 	     //-------------------------------------------------------------------------------
 		    //Ventana bajas alumnos
-	       
-	       
+
 	       internalFrameBajasAlumnos= new JInternalFrame("Eliminar Alumno");
 	       internalFrameBajasAlumnos.getContentPane().setLayout(null);
 	       internalFrameBajasAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -209,7 +216,6 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          baja.setFont(new Font ("Segoe Script", 523, 25));
 	          panelBajasAlumnos.add(baja); 
 	          internalFrameBajasAlumnos.add(panelBajasAlumnos);
-	       
 	      
 	          JLabel bajasNumControl=new JLabel("NUMERO DE CONTROL:");
 	          bajasNumControl.setBounds(60,70,140,30);
@@ -217,6 +223,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          bajasCajaNumControl=new JTextField();
 	          bajasCajaNumControl.setBounds(200,70,80,30);
+	          bajasCajaNumControl.addKeyListener(this);
 	          internalFrameBajasAlumnos.add(bajasCajaNumControl);
 	          
 	          bajaBtnBuscar=new JButton();
@@ -306,8 +313,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          panelTabla1.add(scroll1);
 	          internalFrameBajasAlumnos.add(panelTabla1);
 	       desktopPane.add(internalFrameBajasAlumnos);
-	       
-	       
+	              
 	     //-------------------------------------------------------------------------------
 		    //Ventana Modificaciones alumno
 	       internalFrameModificarAlumnos= new JInternalFrame("Modificar Alumno");
@@ -336,6 +342,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 	          
 	          modificarCajaNumControl=new JTextField();
 	          modificarCajaNumControl.setBounds(200,70,80,30);
+	          modificarNumControl.addKeyListener(this);
 	          internalFrameModificarAlumnos.add(modificarCajaNumControl);
 	          
 	          modificarBtnBuscar=new JButton();
@@ -587,8 +594,10 @@ class VentanaInicio extends JFrame implements ActionListener{
 	
 	public void eliminarAlumno() {
 		AlumnoDAO alumnoDAO=new AlumnoDAO();
-		if(alumnoDAO.eliminarAlumnos(bajasCajaNumControl.getText()))
+		if(alumnoDAO.eliminarAlumnos(bajasCajaNumControl.getText())) {
 			bajaMensaje.setText("<html> <p style=\"color:blue;\">SE ELIMINO ALUMNO</p></html>");
+		actualizarTabla(bajaTabla);
+		}
 		else
 			bajaMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO ELIMINAR ALUMNO</p></html>");
 	}
@@ -663,6 +672,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 			internalFrameBajasAlumnos.setVisible(false);
 			internalFrameModificarAlumnos.setVisible(false);
 			internalFrameConsultasAlumnos.setVisible(false);
+			altaBtnAgregar.requestFocus();
 			actualizarTabla(altaTabla);
 		}if(e.getSource()==itemBajaAlumnos ) {
 			internalFrameAltaAlumnos.setVisible(false);
@@ -758,11 +768,7 @@ class VentanaInicio extends JFrame implements ActionListener{
 			}
 		}
 		
-		//Boton agregar alumnos
-		
 	}
-	
-
 	
 	public void activarComponentes(JComponent ...componentes) {
 		for (JComponent c : componentes) {
@@ -841,7 +847,31 @@ class VentanaInicio extends JFrame implements ActionListener{
 				 }
 				 
 			  }
-		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (internalFrameAltaAlumnos.isVisible()) {
+			   if (e.getKeyCode() == KeyEvent.VK_ENTER) 
+			      altaAlumno();
+			}
+			if (internalFrameBajasAlumnos.isVisible()) {
+				   if (e.getKeyCode() == KeyEvent.VK_ENTER)
+						   buscarAlumno(bajaMensaje, bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno, bajasSpinnerSemestre, bajaComboCarrera);
+				}
+			if (internalFrameModificarAlumnos.isVisible()) {
+				   if (e.getKeyCode() == KeyEvent.VK_ENTER)
+						   buscarAlumno(cambioMensaje, modificarCajaNumControl, modificarCajaNombres, modificarCajaApPaterno, modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera);
+				}
+		}
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
 }//class VentanaInicio
 
 public class Prueba {

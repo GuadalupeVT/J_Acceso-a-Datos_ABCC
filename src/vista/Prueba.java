@@ -14,7 +14,7 @@ import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-class VentanaInicio extends JFrame implements ActionListener, KeyListener{
+class VentanaInicio extends JFrame implements ActionListener{
 	JLabel altaMensaje,bajaMensaje,cambioMensaje, consultaMensaje;
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos,itemBajaAlumnos,itemCambiosAlumnos,itemConsultasAlumnos;
@@ -157,13 +157,12 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	        	  altaComboCarrera.addItem("CP");
 	        	  altaComboCarrera.addItem("LA");
 	          altaComboCarrera.setBounds(230,255,150,20);
-	          altaComboCarrera.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaComboCarrera);
 	          
 	          altaBtnAgregar=new JButton("AGREGAR");
 	          altaBtnAgregar.setBounds(400,120,100,25);
 	          altaBtnAgregar.addActionListener(this);
-	          altaBtnAgregar.addKeyListener(this);
+	         // altaBtnAgregar.addKeyListener(this);
 	          internalFrameAltaAlumnos.add(altaBtnAgregar);
 	          
 	          altaBtnBorrar=new JButton("BORRAR");
@@ -609,23 +608,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			cambioMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO MODIFICAR ALUMNO</p></html>");
 	}
 	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			altaAlumno();
-		}
-	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -691,22 +674,30 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		
 		//Ventana consultas-------------------------------------------------------
 		if(radioTodos.isSelected()) {
-			activarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
+			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+			actualizarTabla(consultaTabla);
+			consultaTabla.setVisible(true);
 		}if(radioNombre.isSelected()) {
 			activarComponentes(consultaCajaNombres);
 			desactivarComponentes(consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+			limpiarComponentes(consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
 		}if(radioApPaterno.isSelected()) {
 			activarComponentes(consultaCajaApPaterno);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
 		}if(radioApMaterno.isSelected()) {
 			activarComponentes(consultaCajaApMaterno);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaSpinnerSemestre,consultaComboCarrera);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
 		}if(radioSemestre.isSelected()) {
 			activarComponentes(consultaSpinnerSemestre);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaTabla);
 		}if(radioCarrera.isSelected()) {
 			activarComponentes(consultaComboCarrera);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre);
 		}
 		
 		   //Boton borrar
@@ -750,7 +741,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 							+"' AND Semestre="+(byte)Integer.parseInt(consultaSpinnerSemestre.getValue().toString())
 							+" AND Carrera='"+consultaComboCarrera.getSelectedItem().toString()
 							+"'";
-				actualizarTabla(consultaTabla,sql);
+				actualizarTabla(consultaTabla);
 				consultaTabla.setVisible(true);
 			}
 		}
@@ -838,10 +829,8 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				 }
 				 
 			  }
-	
 		
 }//class VentanaInicio
-
 
 public class Prueba {
 

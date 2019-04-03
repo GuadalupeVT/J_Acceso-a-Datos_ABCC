@@ -295,6 +295,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          bajaBtnEliminar=new JButton("ELIMINAR");
 	          bajaBtnEliminar.setBounds(450, 175, 100, 25);
 	          bajaBtnEliminar.addActionListener(this);
+	          bajaBtnEliminar.addKeyListener(this);
 	          internalFrameBajasAlumnos.add(bajaBtnEliminar);
 	          
 	          bajaBtnCancelar=new JButton("CANCELAR");
@@ -342,7 +343,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          
 	          modificarCajaNumControl=new JTextField();
 	          modificarCajaNumControl.setBounds(200,70,80,30);
-	          modificarNumControl.addKeyListener(this);
+	          modificarCajaNumControl.addKeyListener(this);
 	          internalFrameModificarAlumnos.add(modificarCajaNumControl);
 	          
 	          modificarBtnBuscar=new JButton();
@@ -496,21 +497,25 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	  		  consultaCajaNombres=new JTextField();
 	          consultaCajaNombres.setBounds(280,110,150,30);
 	          consultaCajaNombres.setEnabled(false);
+	          consultaCajaNombres.addKeyListener(this);
 	          internalFrameConsultasAlumnos.add(consultaCajaNombres);
 	          
 	          consultaCajaApPaterno=new JTextField();
 	          consultaCajaApPaterno.setBounds(280,150,150,30);
 	          consultaCajaApPaterno.setEnabled(false);
+	          consultaCajaApPaterno.addKeyListener(this);
 	          internalFrameConsultasAlumnos.add(consultaCajaApPaterno);
 	          
 	          consultaCajaApMaterno=new JTextField();
 	          consultaCajaApMaterno.setBounds(280,190,150,30);
 	          consultaCajaApMaterno.setEnabled(false);
+	          consultaCajaApMaterno.addKeyListener(this);
 	          internalFrameConsultasAlumnos.add(consultaCajaApMaterno);
 	          
 	          consultaSpinnerSemestre=new JSpinner();
 	          consultaSpinnerSemestre.setBounds(280,230,150,30);
 	          consultaSpinnerSemestre.setEnabled(false);
+	          consultaSpinnerSemestre.addKeyListener(this);
 	          internalFrameConsultasAlumnos.add(consultaSpinnerSemestre);
 	       
 	          consultaComboCarrera= new JComboBox();
@@ -521,6 +526,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          consultaComboCarrera.addItem("LA");
 	          consultaComboCarrera.setBounds(280,270,150,30);
 	          consultaComboCarrera.setEnabled(false);
+	          consultaComboCarrera.addKeyListener(this);
 	          internalFrameConsultasAlumnos.add(consultaComboCarrera);
 	       
 	          consultarBtnBuscar=new JButton();
@@ -672,7 +678,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			internalFrameBajasAlumnos.setVisible(false);
 			internalFrameModificarAlumnos.setVisible(false);
 			internalFrameConsultasAlumnos.setVisible(false);
-			altaBtnAgregar.requestFocus();
+			//altaBtnAgregar.requestFocus();
 			actualizarTabla(altaTabla);
 		}if(e.getSource()==itemBajaAlumnos ) {
 			internalFrameAltaAlumnos.setVisible(false);
@@ -849,18 +855,23 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			  }
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if (internalFrameAltaAlumnos.isVisible()) {
-			   if (e.getKeyCode() == KeyEvent.VK_ENTER) 
-			      altaAlumno();
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if (internalFrameAltaAlumnos.isVisible())
+					altaAlumno();
+				
+				 if (internalFrameBajasAlumnos.isVisible())
+					   buscarAlumno(bajaMensaje, bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno, bajasSpinnerSemestre, bajaComboCarrera);
+			
+				 if (internalFrameModificarAlumnos.isVisible()) 
+					   buscarAlumno(cambioMensaje, modificarCajaNumControl, modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera);
+				      
+				 if (internalFrameConsultasAlumnos.isVisible())
+					 consultarBtnBuscar.doClick();
 			}
-			if (internalFrameBajasAlumnos.isVisible()) {
-				   if (e.getKeyCode() == KeyEvent.VK_ENTER)
-						   buscarAlumno(bajaMensaje, bajasCajaNumControl, bajasCajaNombres, bajasCajaApPaterno, bajasCajaApMaterno, bajasSpinnerSemestre, bajaComboCarrera);
-				}
-			if (internalFrameModificarAlumnos.isVisible()) {
-				   if (e.getKeyCode() == KeyEvent.VK_ENTER)
-						   buscarAlumno(cambioMensaje, modificarCajaNumControl, modificarCajaNombres, modificarCajaApPaterno, modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera);
-				}
+			
+			
+			
+			
 		}
 		@Override
 		public void keyReleased(KeyEvent arg0) {

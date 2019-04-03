@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	JLabel altaMensaje,bajaMensaje,cambioMensaje, consultaMensaje;
@@ -573,11 +574,16 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		alumno.setSegundoAp(altaCajaApMaterno.getText());
 	    alumno.setSemetre((byte)Integer.parseInt(altaComboSemestre.getSelectedItem().toString()));
 		alumno.setCarrera(altaComboCarrera.getSelectedItem().toString());
+		Alumno alumno2= alumnoDAO.buscarAlumno(altaCajaNumControl.getText());
+		if(alumno2!=null) {
+			altaMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO REALIZAR EL ALTA, ESE ALUMNO YA EXISTE</p></html>");
+		}else {
 		if(alumnoDAO.agregarAlumno(alumno)) 
 			altaMensaje.setText("<html> <p style=\"color:blue;\">ALTA REALIZADA CORRECTAMENTE</p></html>");
 		else
 			altaMensaje.setText("<html> <p style=\"color:red;\">NO SE PUDO REALIZAR EL ALTA</p></html>");
 		actualizarTabla(altaTabla);
+	   }
 	}
 	
 	public void buscarAlumno(JLabel mensaje,JTextField cajaNumControl,JTextField cajaNombres,JTextField cajaApPaterno, JTextField cajaApMaterno,JSpinner spinnerSemestre, JComboBox comboCarrera) {
@@ -873,9 +879,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 					 consultarBtnBuscar.doClick();
 			}
 			
-			
-			
-			
+
 		}
 		@Override
 		public void keyReleased(KeyEvent arg0) {
@@ -887,6 +891,8 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			// TODO Auto-generated method stub
 			
 		}
+		
+		
 }//class VentanaInicio
 
 public class Prueba {

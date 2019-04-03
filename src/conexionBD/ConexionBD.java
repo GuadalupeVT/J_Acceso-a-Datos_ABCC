@@ -43,6 +43,7 @@ public class ConexionBD {
 		try {
 			stm.close();
 			conexion.close();
+			System.out.println("Conexion Finalizada");
 		} catch (SQLException e) {
 			System.out.println("No se pudo cerrar la conexion");
 		}

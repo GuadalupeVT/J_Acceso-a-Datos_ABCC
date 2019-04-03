@@ -3,6 +3,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
+import conexionBD.ConexionBD;
 import controlador.AlumnoDAO;
 import modelo.Alumno;
 
@@ -878,6 +879,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				 if (internalFrameConsultasAlumnos.isVisible())
 					 consultarBtnBuscar.doClick();
 			}
+			
 			
 
 		}

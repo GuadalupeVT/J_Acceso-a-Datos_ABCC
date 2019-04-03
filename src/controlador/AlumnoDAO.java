@@ -18,13 +18,17 @@ public class AlumnoDAO {
 		+"', "+a.getSemetre()
 		+", '"+a.getCarrera()+"')";
 		ConexionBD conexion=new ConexionBD();
-		return conexion.ejecutarInstruccion(sql);
+		boolean x= conexion.ejecutarInstruccion(sql);
+		conexion.cerrarConexion();
+		return x;
 	}
 	
 	public boolean eliminarAlumnos(String nc) {
 		String sql ="DELETE FROM Alumnos WHERE NumControl='"+nc+"'";
 		ConexionBD conexion=new ConexionBD();
-		return conexion.ejecutarInstruccion(sql);
+		boolean x= conexion.ejecutarInstruccion(sql);
+		conexion.cerrarConexion();
+		return x;
 	}
 	
 	public boolean modificarAlumno(Alumno a) {
@@ -36,7 +40,9 @@ public class AlumnoDAO {
 		+"',Carrera='"+a.getCarrera()
 		+"' WHERE NumControl='"+a.getNumControl()+"'";
 		ConexionBD conexion=new ConexionBD();
-		return conexion.ejecutarInstruccion(sql);
+		boolean x= conexion.ejecutarInstruccion(sql);
+		conexion.cerrarConexion();
+		return x;
 	}
 	
 	 //=================== BUSCAR UN REGISTRO ===================
@@ -59,7 +65,9 @@ public class AlumnoDAO {
 			} catch (SQLException e) {
 				System.out.println("No se encontro el registro");
 				return null;
-			}		
+			}finally {
+				conexion.cerrarConexion();
+			}
 			return alumno;
 		}
 		//=================== BUSCAR MULTIPLES REGISTROS ===================
@@ -89,9 +97,11 @@ public class AlumnoDAO {
 				rs.next();
 				}
 			} catch (SQLException e) {
-				
+				System.out.println("No se encontraron registros");
+				return null;
+			}finally {
+				conexion.cerrarConexion();
 			}
-			
 			return listaAlumnos;
 		}
 

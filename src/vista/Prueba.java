@@ -678,15 +678,18 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			internalFrameBajasAlumnos.setVisible(false);
 			internalFrameModificarAlumnos.setVisible(false);
 			internalFrameConsultasAlumnos.setVisible(false);
+			limpiarComponentes(altaCajaNumControl,altaCajaNombres,altaCajaApPaterno,altaCajaApMaterno,altaComboSemestre,altaComboCarrera,altaMensaje);
 			//altaBtnAgregar.requestFocus();
 			actualizarTabla(altaTabla);
 		}if(e.getSource()==itemBajaAlumnos ) {
+			limpiarComponentes(bajasCajaNumControl, bajasCajaNombres,bajasCajaApPaterno,bajasCajaApMaterno,bajasSpinnerSemestre,bajaComboCarrera,bajaMensaje);
 			internalFrameAltaAlumnos.setVisible(false);
 			internalFrameBajasAlumnos.setVisible(true);
 			internalFrameModificarAlumnos.setVisible(false);
 			internalFrameConsultasAlumnos.setVisible(false);
 			actualizarTabla(bajaTabla);
 		}if(e.getSource()==itemCambiosAlumnos ) {
+			limpiarComponentes(modificarCajaNumControl, modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno, modificarSpinnerSemestre, modificarComboCarrera,cambioMensaje);
 			internalFrameAltaAlumnos.setVisible(false);
 			internalFrameBajasAlumnos.setVisible(false);
 			internalFrameModificarAlumnos.setVisible(true);
@@ -694,6 +697,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			desactivarComponentes(modificarCajaNombres,modificarCajaApPaterno,modificarCajaApMaterno,modificarSpinnerSemestre,modificarComboCarrera);
 			actualizarTabla(modificarTabla);
 		}if(e.getSource()==itemConsultasAlumnos ) {
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
 			internalFrameAltaAlumnos.setVisible(false);
 			internalFrameBajasAlumnos.setVisible(false);
 			internalFrameModificarAlumnos.setVisible(false);

@@ -274,6 +274,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          bajasSpinnerSemestre=new JSpinner();
 	          bajasSpinnerSemestre.setBounds(210,250,150,30);
 	          bajasSpinnerSemestre.setEnabled(false);
+	          ((JSpinner.DefaultEditor) bajasSpinnerSemestre.getEditor()).getTextField().setEditable(false);
 	          internalFrameBajasAlumnos.add(bajasSpinnerSemestre);
 	          
 	          JLabel bajasCarrera=new JLabel("CARRERA:");
@@ -388,8 +389,12 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          modificarSemestre.setBounds(60,250,120,30);
 	          internalFrameModificarAlumnos.add(modificarSemestre);
 	          
+	          //SpinnerNumberModel modelo =new SpinnerNumberModel(new String[] {"Item 0", "Item 1", "Item 2", "Item 3"});
+	          
 	          modificarSpinnerSemestre=new JSpinner();
 	          modificarSpinnerSemestre.setBounds(210,250,150,30);
+	          modificarSpinnerSemestre.setModel(new SpinnerNumberModel(5, 1, 10, 1));
+	          ((JSpinner.DefaultEditor) modificarSpinnerSemestre.getEditor()).getTextField().setEditable(false);
 	          internalFrameModificarAlumnos.add(modificarSpinnerSemestre);
 	          
 	          JLabel modificarCarrera=new JLabel("CARRERA:");
@@ -514,10 +519,13 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 	          consultaCajaApMaterno.addKeyListener(this);
 	          internalFrameConsultasAlumnos.add(consultaCajaApMaterno);
 	          
-	          consultaSpinnerSemestre=new JSpinner();
+	          consultaSpinnerSemestre=new JSpinner(); 
 	          consultaSpinnerSemestre.setBounds(280,230,150,30);
 	          consultaSpinnerSemestre.setEnabled(false);
 	          consultaSpinnerSemestre.addKeyListener(this);
+	          consultaSpinnerSemestre.setModel(new SpinnerNumberModel(5, 1, 10, 1));
+	          consultaSpinnerSemestre.setValue(1);
+	          ((JSpinner.DefaultEditor) consultaSpinnerSemestre.getEditor()).getTextField().setEditable(false);
 	          internalFrameConsultasAlumnos.add(consultaSpinnerSemestre);
 	       
 	          consultaComboCarrera= new JComboBox();
@@ -715,10 +723,8 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		
 		//Ventana consultas-------------------------------------------------------
 		if(radioTodos.isSelected()) {
-			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre);
 			activarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
-			//actualizarTabla(consultaTabla);
-			//consultaTabla.setVisible(true);
+			//limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre);
 		}if(radioNombre.isSelected()) {
 			activarComponentes(consultaCajaNombres);
 			desactivarComponentes(consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
@@ -819,7 +825,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				if(c instanceof JTextField)
 	               ((JTextField) c).setText("");
 				if (c instanceof JSpinner)
-					((JSpinner) c).setValue(0);
+					((JSpinner) c).setValue(1);
 				if(c instanceof JComboBox) 
 					((JComboBox) c).setSelectedIndex(0);
 				if(c instanceof JLabel) 
@@ -882,8 +888,6 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				 if (internalFrameConsultasAlumnos.isVisible())
 					 consultarBtnBuscar.doClick();
 			}
-			
-			
 
 		}
 		@Override
@@ -896,12 +900,10 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			// TODO Auto-generated method stub
 			
 		}
-		
-		
+			
 }//class VentanaInicio
 
 public class Prueba {
-
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override

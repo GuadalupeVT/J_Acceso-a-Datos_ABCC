@@ -709,30 +709,32 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 			internalFrameBajasAlumnos.setVisible(false);
 			internalFrameModificarAlumnos.setVisible(false);
 			internalFrameConsultasAlumnos.setVisible(true);
+			actualizarTabla(consultaTabla);
+			consultaTabla.setVisible(true);
 		}
 		
 		//Ventana consultas-------------------------------------------------------
 		if(radioTodos.isSelected()) {
-			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
-			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
-			actualizarTabla(consultaTabla);
-			consultaTabla.setVisible(true);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre);
+			activarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
+			//actualizarTabla(consultaTabla);
+			//consultaTabla.setVisible(true);
 		}if(radioNombre.isSelected()) {
 			activarComponentes(consultaCajaNombres);
 			desactivarComponentes(consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
-			limpiarComponentes(consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
+			limpiarComponentes(consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre);
 		}if(radioApPaterno.isSelected()) {
 			activarComponentes(consultaCajaApPaterno);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApMaterno,consultaSpinnerSemestre,consultaComboCarrera);
-			limpiarComponentes(consultaCajaNombres,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre);
 		}if(radioApMaterno.isSelected()) {
 			activarComponentes(consultaCajaApMaterno);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaSpinnerSemestre,consultaComboCarrera);
-			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaComboCarrera,consultaSpinnerSemestre);
 		}if(radioSemestre.isSelected()) {
 			activarComponentes(consultaSpinnerSemestre);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera);
-			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaTabla);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera);
 		}if(radioCarrera.isSelected()) {
 			activarComponentes(consultaComboCarrera);
 			desactivarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaSpinnerSemestre);
@@ -741,7 +743,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 		
 		   //Boton borrar
 		if (e.getSource()==consultarBtnBorrar)
-			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla);
+			limpiarComponentes(consultaCajaNombres,consultaCajaApPaterno,consultaCajaApMaterno,consultaComboCarrera,consultaSpinnerSemestre,consultaTabla,consultaMensaje);
 		  //Boton cancelar
 		if (e.getSource()==consultarBtnCancelar)
 			internalFrameConsultasAlumnos.setVisible(false);
@@ -780,7 +782,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 							+"' AND Semestre="+(byte)Integer.parseInt(consultaSpinnerSemestre.getValue().toString())
 							+" AND Carrera='"+consultaComboCarrera.getSelectedItem().toString()
 							+"'";
-				actualizarTabla(consultaTabla);
+				actualizarTabla(consultaTabla,sql);
 				consultaTabla.setVisible(true);
 			}
 		}
@@ -859,6 +861,7 @@ class VentanaInicio extends JFrame implements ActionListener, KeyListener{
 				 tabla.setModel(modeloDatos);
 				 if (modeloDatos.getRowCount()==0) {
 					 consultaMensaje.setText("<html> <p style=\"color:red;\">NO SE ENCONTRARON REGISTROS</p></html>");
+					 actualizarTabla(consultaTabla);
 				 }else {
 					 consultaMensaje.setText("");
 				 }
